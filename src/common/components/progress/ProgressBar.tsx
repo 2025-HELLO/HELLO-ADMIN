@@ -1,9 +1,9 @@
 import * as s from './ProgressBar.css';
 
-type Props = {
+interface Props {
   total: number;
   current: number;
-};
+}
 
 const ProgressBar = ({ total, current }: Props) => {
   const percentage = Math.min(100, Math.max(0, (current / total) * 100));
