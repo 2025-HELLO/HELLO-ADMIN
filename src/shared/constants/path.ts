@@ -4,4 +4,3 @@ export const PATH = {
   LOGIN: '/login',
   MYPAGE: '/mypage',
 } as const;
-
