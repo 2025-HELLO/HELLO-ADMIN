@@ -6,7 +6,6 @@ export const container = style({
   flexDirection: 'column',
   alignItems: 'center',
   gap: '1rem',
-  padding: '2.5rem 1.6rem',
 });
 
 export const track = style({

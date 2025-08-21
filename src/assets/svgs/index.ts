@@ -1,4 +1,9 @@
 export { default as IcBack } from './IcBack';
 export { default as IcInfo } from './IcInfo';
+export { default as IcPlay } from './IcPlay';
 export { default as IcProfile } from './IcProfile';
+export { default as IcRecord } from './IcRecord';
+export { default as IcReplay } from './IcReplay';
 export { default as IcSound } from './IcSound';
+export { default as IcStop } from './IcStop';
+export { default as IcTip } from './IcTip';
