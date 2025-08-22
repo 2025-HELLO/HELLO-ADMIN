@@ -6,6 +6,8 @@ import Header from '@/common/components/header/Header';
 import PageHeader from '@/common/components/header/PageHeader';
 import Home from '@/pages/home/page/Home';
 import VoiceCollector from '@/pages/data/voice/page/VoiceCollector';
+import WeeklyReportList from '@/pages/weekly-report/page/WeeklyReportList';
+import WeeklyReportDetail from '@/pages/weekly-report/page/WeeklyReportDetail';
 
 export const MainRoutes: RouteObject[] = [
   {
@@ -18,6 +20,19 @@ export const MainRoutes: RouteObject[] = [
       {
         path: PATH.VOICE_DATA,
         element: <VoiceCollector />,
+      },
+    ],
+  },
+  {
+    element: <Layout header={<PageHeader title="주간 보고서" />} />,
+    children: [
+      {
+        path: PATH.WEEKLY_REPORTS,
+        element: <WeeklyReportList />,
+      },
+      {
+        path: PATH.WEEKLY_REPORT_DETAIL(':id'),
+        element: <WeeklyReportDetail />,
       },
     ],
   },
