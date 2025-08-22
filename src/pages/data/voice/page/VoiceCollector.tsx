@@ -6,10 +6,7 @@ import * as s from './VoiceCollector.css';
 
 import { useTTS } from '@/shared/hooks/useTTS';
 import Button from '@/common/components/button/Button';
-
-const TOTAL_SENTENCES = 100;
-const CURRENT_INDEX = 24;
-const EXAMPLE_SENTENCE = '안녕하세요. 오늘 하루는 어떻게 보내셨나요? 무엇을 도와드릴까요?';
+import { SENTENCES } from '@/shared/mocks/voice/sentences';
 
 const CANVAS_WIDTH = 600;
 const CANVAS_HEIGHT = 80;
@@ -39,6 +36,8 @@ const VoiceCollector = () => {
   const dataArrayRef = useRef<Uint8Array | null>(null);
   const animationRef = useRef<number | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const formatTime = (seconds: number) => {
     const min = Math.floor(seconds / 60)
@@ -238,16 +237,14 @@ const VoiceCollector = () => {
   };
 
   const handlePlay = () => {
-    speak(EXAMPLE_SENTENCE);
+    speak(SENTENCES[currentIndex].text);
   };
 
   const handlePrev = () => {
-    console.log('이전 문장으로 이동');
-    // TODO: 문장 인덱스 감소 로직 연결
+    setCurrentIndex((prev) => Math.max(prev - 1, 0));
   };
   const handleNext = () => {
-    console.log('다음 문장으로 이동');
-    // TODO: 문장 인덱스 증가 로직 연결
+    setCurrentIndex((prev) => Math.min(prev + 1, SENTENCES.length - 1));
   };
 
   useEffect(() => {
@@ -265,12 +262,11 @@ const VoiceCollector = () => {
 
   return (
     <div className={s.container}>
-      <ProgressBar total={TOTAL_SENTENCES} current={CURRENT_INDEX} />
-
+      <ProgressBar total={SENTENCES.length} current={currentIndex + 1} />
       <div className={s.divider} aria-hidden />
 
       <header className={s.header}>
-        <span className={s.sentenceNumber}>문장 {CURRENT_INDEX}</span>
+        <span className={s.sentenceNumber}>문장 {currentIndex + 1}</span>{' '}
         <button
           type="button"
           onClick={handlePlay}
@@ -282,8 +278,7 @@ const VoiceCollector = () => {
         </button>
       </header>
 
-      <div className={s.exampleBox}>{EXAMPLE_SENTENCE}</div>
-
+      <div className={s.exampleBox}>{SENTENCES[currentIndex].text}</div>
       <section className={s.infoSection}>
         <IcInfo className={s.infoIcon} />
         <span className={s.infoText}>자연스럽고 또박또박 읽어주세요</span>
