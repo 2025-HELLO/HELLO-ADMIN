@@ -1,8 +1,11 @@
 import ProgressBar from '@common/components/progress/ProgressBar';
 import { IcSound, IcInfo, IcRecord, IcStop, IcLeftarrow, IcRightarrow } from '@assets/svgs/index';
-import { useRef, useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import * as s from './VoiceCollector.css';
+import { useRecorder } from '../hooks/useRecorder';
+import { useTimer } from '../hooks/useTimer';
+import { useVisualizer } from '../hooks/useVisualizer';
 
 import { useTTS } from '@/shared/hooks/useTTS';
 import Button from '@/common/components/button/Button';
@@ -10,255 +13,122 @@ import { SENTENCES } from '@/shared/mocks/voice/sentences';
 
 const CANVAS_WIDTH = 600;
 const CANVAS_HEIGHT = 80;
-const ANALYSER_FFT_SIZE = 64;
-const RECORDER_TIMESLICE_MS = 250;
-const REC_MIME = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
-  ? 'audio/webm;codecs=opus'
-  : 'audio/webm';
 
 const VoiceCollector = () => {
   const { speak, speaking } = useTTS();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [audioURL, setAudioURL] = useState<string | null>(null);
-  const [isRecording, setIsRecording] = useState(false);
-  const audioChunks = useRef<Blob[]>([]);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  const [recordTime, setRecordTime] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const lastStartRef = useRef<number | null>(null);
-  const accumulatedMsRef = useRef<number>(0);
-
-  const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
-  const analyserRef = useRef<AnalyserNode | null>(null);
-  const dataArrayRef = useRef<Uint8Array | null>(null);
-  const animationRef = useRef<number | null>(null);
-  const streamRef = useRef<MediaStream | null>(null);
-
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const formatTime = (seconds: number) => {
-    const min = Math.floor(seconds / 60)
+  const { seconds, start: startTimer, stop: stopTimer, reset: resetTimer } = useTimer(500);
+  const { start: startVisualizer, stop: stopVisualizer } = useVisualizer(canvasRef, {
+    fftSize: 64,
+    width: CANVAS_WIDTH,
+    height: CANVAS_HEIGHT,
+    barColor: '#f87171',
+  });
+
+  const {
+    audioURL,
+    isRecording,
+    start: startRecord,
+    pause: pauseRecord,
+    stop: stopRecord,
+    audioRef,
+    mediaRecorderRef,
+    streamRef,
+  } = useRecorder({
+    onStart: (stream) => {
+      resetTimer();
+      startTimer();
+      startVisualizer(stream);
+    },
+    onStop: () => {
+      stopTimer();
+      stopVisualizer();
+    },
+  });
+
+  const formatTime = (sec: number) => {
+    const mm = Math.floor(sec / 60)
       .toString()
       .padStart(2, '0');
-    const sec = (seconds % 60).toString().padStart(2, '0');
-    return `${min}:${sec}`;
+    const ss = Math.floor(sec % 60)
+      .toString()
+      .padStart(2, '0');
+    return `${mm}:${ss}`;
   };
 
-  const startVisualizer = (stream: MediaStream) => {
-    const audioCtx = new AudioContext();
-    const analyser = audioCtx.createAnalyser();
-    const source = audioCtx.createMediaStreamSource(stream);
-    source.connect(analyser);
-    analyser.fftSize = ANALYSER_FFT_SIZE;
-
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-
-    analyserRef.current = analyser;
-    dataArrayRef.current = dataArray;
-    setAudioContext(audioCtx);
-
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
-
-    if (canvas) {
-      canvas.width = CANVAS_WIDTH;
-      canvas.height = CANVAS_HEIGHT;
+  useEffect(() => {
+    const el = audioRef.current;
+    if (!el) {
+      return;
     }
-
-    const draw = () => {
-      if (!ctx || !analyserRef.current || !dataArrayRef.current || !canvas) {
-        return;
-      }
-
-      animationRef.current = requestAnimationFrame(draw);
-      analyserRef.current.getByteFrequencyData(dataArrayRef.current);
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const barWidth = (canvas.width / bufferLength) * 1.5;
-      let x = 0;
-
-      for (let i = 0; i < bufferLength; i++) {
-        const barHeight = dataArrayRef.current[i] / 2;
-        ctx.fillStyle = '#f87171';
-        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-        x += barWidth + 1;
-      }
-    };
-
-    draw();
-  };
-
-  const stopVisualizer = () => {
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-      animationRef.current = null;
+    if (audioURL) {
+      el.srcObject = null;
+      el.src = audioURL;
+      el.load();
+    } else {
+      el.removeAttribute('src');
+      el.load();
     }
-    if (audioContext) {
-      audioContext.close();
-      setAudioContext(null);
-    }
-  };
-
-  const startTimer = () => {
-    lastStartRef.current = Date.now();
-
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
-
-    timerRef.current = setInterval(() => {
-      const runningMs = lastStartRef.current ? Date.now() - lastStartRef.current : 0;
-      const totalMs = accumulatedMsRef.current + runningMs;
-      setRecordTime(Math.floor(totalMs / 1000));
-    }, 500);
-  };
-
-  const stopTimer = () => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
-    if (lastStartRef.current) {
-      accumulatedMsRef.current += Date.now() - lastStartRef.current;
-      lastStartRef.current = null;
-    }
-  };
+  }, [audioURL, audioRef]);
 
   const onRecord = async () => {
     try {
-      const r = mediaRecorderRef.current;
-      if (r && r.state === 'recording') {
+      if (isRecording) {
         return;
       }
 
-      if (!mediaRecorderRef.current || mediaRecorderRef.current.state === 'inactive') {
-        if (audioURL) {
-          URL.revokeObjectURL(audioURL);
-          setAudioURL(null);
-        }
-
-        audioChunks.current = [];
-        accumulatedMsRef.current = 0;
-        lastStartRef.current = null;
-        setRecordTime(0);
-
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        streamRef.current = stream;
-
-        const recorder = new MediaRecorder(stream, { mimeType: REC_MIME });
-
-        recorder.ondataavailable = (event) => {
-          if (event.data && event.data.size > 0) {
-            audioChunks.current.push(event.data);
-          }
-        };
-
-        recorder.onstop = () => {
-          const finalBlob = new Blob(audioChunks.current, { type: REC_MIME });
-          const url = URL.createObjectURL(finalBlob);
-
-          setAudioURL(url);
-          if (audioRef.current) {
-            audioRef.current.srcObject = null;
-            audioRef.current.src = url;
-          }
-
-          if (streamRef.current) {
-            streamRef.current.getTracks().forEach((track) => track.stop());
-            streamRef.current = null;
-          }
-        };
-
-        mediaRecorderRef.current = recorder;
-        recorder.start(RECORDER_TIMESLICE_MS);
-
-        setIsRecording(true);
-
-        startTimer();
-        startVisualizer(stream);
-        return;
-      }
-
-      if (mediaRecorderRef.current.state === 'paused') {
-        mediaRecorderRef.current.resume();
-        setIsRecording(true);
-
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'paused') {
+        await startRecord();
         startTimer();
         if (streamRef.current) {
           startVisualizer(streamRef.current);
         }
         return;
       }
-    } catch (error) {
-      console.error('녹음 시작 실패:', error);
+
+      await startRecord();
+    } catch (e) {
+      console.error('녹음 시작 실패:', e);
     }
   };
 
   const onStop = () => {
-    const recorder = mediaRecorderRef.current;
-    if (recorder && isRecording) {
-      recorder.pause();
-      setIsRecording(false);
-
-      stopTimer();
-      stopVisualizer();
-
-      try {
-        recorder.requestData();
-      } catch (err) {
-        console.error(err);
+    if (!isRecording) {
+      return;
+    }
+    pauseRecord();
+    stopTimer();
+    stopVisualizer();
+    try {
+      if (mediaRecorderRef.current?.state === 'paused') {
+        mediaRecorderRef.current.requestData();
       }
-      const previewBlob = new Blob(audioChunks.current, { type: REC_MIME });
-      const url = URL.createObjectURL(previewBlob);
-      if (audioURL) {
-        URL.revokeObjectURL(audioURL);
-      }
-      setAudioURL(url);
-      if (audioRef.current) {
-        audioRef.current.srcObject = null;
-        audioRef.current.src = url;
-      }
+    } catch {
+      // noop
     }
   };
 
-  const onSubmit = () => {
-    const recorder = mediaRecorderRef.current;
-    if (recorder && recorder.state !== 'inactive') {
-      recorder.stop();
-      setIsRecording(false);
+  const onSubmit = async () => {
+    try {
+      await stopRecord();
+    } finally {
       stopTimer();
       stopVisualizer();
     }
   };
 
-  const handlePlay = () => {
-    speak(SENTENCES[currentIndex].text);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
-  };
-  const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(prev + 1, SENTENCES.length - 1));
-  };
+  const handlePlay = () => speak(SENTENCES[currentIndex].text);
+  const handlePrev = () => setCurrentIndex((p) => Math.max(p - 1, 0));
+  const handleNext = () => setCurrentIndex((p) => Math.min(p + 1, SENTENCES.length - 1));
 
   useEffect(() => {
     return () => {
-      if (audioURL) {
-        URL.revokeObjectURL(audioURL);
-      }
       stopTimer();
       stopVisualizer();
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach((track) => track.stop());
-      }
     };
-  }, [audioURL]);
+  }, [stopTimer, stopVisualizer]);
 
   return (
     <div className={s.container}>
@@ -266,7 +136,7 @@ const VoiceCollector = () => {
       <div className={s.divider} aria-hidden />
 
       <header className={s.header}>
-        <span className={s.sentenceNumber}>문장 {currentIndex + 1}</span>{' '}
+        <span className={s.sentenceNumber}>문장 {currentIndex + 1}</span>
         <button
           type="button"
           onClick={handlePlay}
@@ -279,18 +149,27 @@ const VoiceCollector = () => {
       </header>
 
       <div className={s.exampleBox}>{SENTENCES[currentIndex].text}</div>
+
       <section className={s.infoSection}>
         <IcInfo className={s.infoIcon} />
         <span className={s.infoText}>자연스럽고 또박또박 읽어주세요</span>
       </section>
+
       <div className={s.divider} aria-hidden />
+
       <section className={s.recorderSection}>
         <div className={s.visualizerWrapper}>
-          <canvas ref={canvasRef} className={s.visualizer} width={600} height={80} />
+          <canvas
+            ref={canvasRef}
+            className={s.visualizer}
+            width={CANVAS_WIDTH}
+            height={CANVAS_HEIGHT}
+          />
           <div className={s.timer} aria-live="polite">
-            {formatTime(recordTime)}
+            {formatTime(seconds)}
           </div>
         </div>
+
         <button
           className={s.recordButton}
           aria-pressed={isRecording}
@@ -303,11 +182,12 @@ const VoiceCollector = () => {
           )}
         </button>
 
-        <audio ref={audioRef} src={audioURL ?? undefined} controls />
+        <audio ref={audioRef} src={audioURL ?? undefined} controls preload="metadata" />
 
         <div className={s.actionButtons}>
           <Button variant="primary" label="녹음 완료" onClick={onSubmit} disabled={!audioURL} />
         </div>
+
         <div className={s.navButtons}>
           <Button
             variant="tertiary"
