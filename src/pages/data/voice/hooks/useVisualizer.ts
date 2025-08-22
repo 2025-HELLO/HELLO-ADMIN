@@ -12,7 +12,7 @@ interface UseVisualizerOptions {
 }
 
 interface UseVisualizerReturn {
-  start: (_stream: MediaStream) => void;
+  start: (_stream: MediaStream) => Promise<void>;
   stop: () => void;
   isRunning: boolean;
 }
