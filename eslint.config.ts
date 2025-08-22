@@ -45,7 +45,7 @@ export default [
       'react/react-in-jsx-scope': 'off',
 
       'no-console': 'off',
-      'no-unused-vars': 'warn',
+      'no-unused-vars': 'off',
       curly: 'error',
 
       'import/order': [
@@ -61,6 +61,14 @@ export default [
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 
       '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
 
       'prettier/prettier': 'error',
     },
