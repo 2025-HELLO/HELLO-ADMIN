@@ -109,3 +109,12 @@ export const actionButtons = style([
   layout.flexColumnJustifyCenter,
   { gap: '1.2rem', marginTop: '1rem' },
 ]);
+
+export const navButtons = style([
+  layout.flexCenter,
+  {
+    gap: '1rem',
+    marginTop: '1rem',
+    width: '100%',
+  },
+]);

@@ -15,6 +15,8 @@ export const baseButton = style([
   },
 ]);
 
+export const smallButton = style([baseButton, { width: '15rem' }]);
+
 export const primaryButton = style([baseButton, { backgroundColor: colors.blue02 }]);
 
 export const secondaryButton = style([baseButton, { backgroundColor: colors.blue03 }]);

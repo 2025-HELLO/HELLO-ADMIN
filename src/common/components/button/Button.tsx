@@ -10,6 +10,8 @@ interface ButtonProps {
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  size?: 'full' | 'small';
+  iconPosition?: 'left' | 'right';
 }
 
 const Button = ({
@@ -19,15 +21,21 @@ const Button = ({
   disabled = false,
   onClick,
   type = 'button',
+  size = 'full',
+  iconPosition = 'left',
 }: ButtonProps) => {
-  let buttonClass;
+  let variantClass;
   if (variant === 'secondary') {
-    buttonClass = styles.secondaryButton;
+    variantClass = styles.secondaryButton;
   } else if (variant === 'tertiary') {
-    buttonClass = styles.tertiaryButton;
+    variantClass = styles.tertiaryButton;
   } else {
-    buttonClass = styles.primaryButton;
+    variantClass = styles.primaryButton;
   }
+
+  const buttonClass = [variantClass, size === 'small' ? styles.smallButton : null]
+    .filter(Boolean)
+    .join(' ');
 
   const renderIcon = () => {
     if (!icon) {
@@ -50,8 +58,17 @@ const Button = ({
       onClick={onClick}
       type={type}
     >
-      {renderIcon()}
-      {label}
+      {iconPosition === 'left' ? (
+        <>
+          {renderIcon()}
+          {label}
+        </>
+      ) : (
+        <>
+          {label}
+          {renderIcon()}
+        </>
+      )}
     </button>
   );
 };

@@ -1,5 +1,5 @@
 import ProgressBar from '@common/components/progress/ProgressBar';
-import { IcSound, IcInfo, IcRecord, IcStop } from '@assets/svgs/index';
+import { IcSound, IcInfo, IcRecord, IcStop, IcLeftarrow, IcRightarrow } from '@assets/svgs/index';
 import { useRef, useState, useEffect } from 'react';
 
 import * as s from './VoiceCollector.css';
@@ -241,6 +241,15 @@ const VoiceCollector = () => {
     speak(EXAMPLE_SENTENCE);
   };
 
+  const handlePrev = () => {
+    console.log('이전 문장으로 이동');
+    // TODO: 문장 인덱스 감소 로직 연결
+  };
+  const handleNext = () => {
+    console.log('다음 문장으로 이동');
+    // TODO: 문장 인덱스 증가 로직 연결
+  };
+
   useEffect(() => {
     return () => {
       if (audioURL) {
@@ -303,6 +312,23 @@ const VoiceCollector = () => {
 
         <div className={s.actionButtons}>
           <Button variant="primary" label="녹음 완료" onClick={onSubmit} disabled={!audioURL} />
+        </div>
+        <div className={s.navButtons}>
+          <Button
+            variant="tertiary"
+            size="small"
+            icon={<IcLeftarrow />}
+            label="이전"
+            onClick={handlePrev}
+          />
+          <Button
+            variant="secondary"
+            size="small"
+            icon={<IcRightarrow />}
+            label="다음"
+            iconPosition="right"
+            onClick={handleNext}
+          />
         </div>
       </section>
     </div>
