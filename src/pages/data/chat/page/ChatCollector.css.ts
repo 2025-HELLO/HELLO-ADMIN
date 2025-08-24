@@ -106,6 +106,12 @@ export const pickBtn = style({
   alignItems: 'center',
   justifyContent: 'center',
 });
+/* 앞에 들어가는 아이콘 크기 */
+export const infoIcon = style({
+  width: 16,
+  height: 16,
+  flexShrink: 0,
+});
 
 /* 안내 카드: 파랑/회색 버전 */
 const cardBase = {

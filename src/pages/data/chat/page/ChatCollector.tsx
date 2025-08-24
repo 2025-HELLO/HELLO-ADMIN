@@ -23,7 +23,7 @@ const ChatCollector: React.FC = () => {
   return (
     <form className={styles.wrap} onSubmit={onSubmit}>
       <div className={styles.inner}>
-        {/* 상단: 아이콘만 (배경 원 없음) */}
+        {/* 상단: 카카오톡 아이콘 */}
         <div className={styles.hero}>
           <img src="/svgs/ic_cacao.svg" alt="카카오톡 아이콘" className={styles.heroIconPlain} />
           <h1 className={styles.title}>카카오톡 대화 내역을 업로드해주세요</h1>
@@ -34,7 +34,7 @@ const ChatCollector: React.FC = () => {
           </p>
         </div>
 
-        {/* 업로드 상자: 점선 테두리 */}
+        {/* 업로드 상자 */}
         <div className={styles.uploadBox}>
           <div className={styles.uploadCenter}>
             <img src="/svgs/ic_uproad.svg" alt="업로드 아이콘" className={styles.uploadIconPlain} />
@@ -67,10 +67,10 @@ const ChatCollector: React.FC = () => {
           </div>
         </div>
 
-        {/* 가이드 섹션: 파랑 */}
+        {/* 가이드 섹션: 파랑 (ic_information.svg) */}
         <section className={styles.infoCardBlue}>
           <div className={styles.infoHead}>
-            <span className={styles.infoDotBlue} />
+            <img src="/svgs/ic_information.svg" alt="정보 아이콘" className={styles.infoIcon} />
             <h2 className={styles.infoTitle}>파일 내보내기 방법</h2>
           </div>
           <p className={styles.infoDesc}>
@@ -78,10 +78,10 @@ const ChatCollector: React.FC = () => {
           </p>
         </section>
 
-        {/* 가이드 섹션: 회색 */}
+        {/* 가이드 섹션: 회색 (ic_protection.svg) */}
         <section className={styles.infoCardGray}>
           <div className={styles.infoHead}>
-            <span className={styles.infoDotGray} />
+            <img src="/svgs/ic_protection.svg" alt="보호 아이콘" className={styles.infoIcon} />
             <h2 className={styles.infoTitle}>개인정보 보호</h2>
           </div>
           <p className={styles.infoDesc}>
