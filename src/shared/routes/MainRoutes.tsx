@@ -6,6 +6,7 @@ import Header from '@/common/components/header/Header';
 import PageHeader from '@/common/components/header/PageHeader';
 import Home from '@/pages/home/page/Home';
 import VoiceCollector from '@/pages/data/voice/page/VoiceCollector';
+import ChatCollector from '@/pages/data/chat/page/ChatCollector';
 
 export const MainRoutes: RouteObject[] = [
   {
@@ -18,6 +19,10 @@ export const MainRoutes: RouteObject[] = [
       {
         path: PATH.VOICE_DATA,
         element: <VoiceCollector />,
+      },
+      {
+        path: PATH.CHAT_DATA, // ⬅️ PATH에 CHAT_DATA 추가해놔야 함
+        element: <ChatCollector />,
       },
     ],
   },
