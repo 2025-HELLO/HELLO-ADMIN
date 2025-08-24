@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import * as styles from './WeeklyReportList.css';
+import * as s from './WeeklyReportList.css';
 
 import { IcRightarrow } from '@/assets/svgs';
 import { PATH } from '@/shared/constants/path';
@@ -21,30 +21,32 @@ const WeeklyReportList = () => {
   ];
 
   return (
-    <div className={styles.page}>
+    <div className={s.page}>
       <div>
-        <p className={styles.titleLine}>홍길동님의</p>
-        <p className={styles.titleLine}>지난 주간 보고서를 확인하세요</p>
+        <p className={s.titleLine}>홍길동님의</p>
+        <p className={s.titleLine}>지난 주간 보고서를 확인하세요</p>
       </div>
 
-      <div className={styles.list}>
+      <div className={s.list}>
         {items.map((it) => (
           <div
             key={it.id}
-            className={styles.card}
+            className={s.card}
             role="button"
             tabIndex={0}
-            onClick={() => navigate(PATH.WEEKLY_REPORT_DETAIL(it.id))}
+            onClick={() =>
+              navigate(PATH.WEEKLY_REPORT_DETAIL(it.id), { state: { range: it.range } })
+            }
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
-                navigate(PATH.WEEKLY_REPORT_DETAIL(it.id));
+                navigate(PATH.WEEKLY_REPORT_DETAIL(it.id), { state: { range: it.range } });
               }
             }}
           >
-            <span className={styles.cardText}>
+            <span className={s.cardText}>
               {it.label} ({it.range})
             </span>
-            <IcRightarrow className={styles.chevron} />
+            <IcRightarrow className={s.chevron} />
           </div>
         ))}
       </div>
