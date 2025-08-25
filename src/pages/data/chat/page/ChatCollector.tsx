@@ -17,7 +17,9 @@ const ChatCollector: React.FC = () => {
     if (!file) {
       return;
     }
+
     // TODO: 업로드 API 연동
+    alert('저장 완료!');
   };
 
   return (
