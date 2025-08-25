@@ -6,6 +6,8 @@ import Header from '@/common/components/header/Header';
 import PageHeader from '@/common/components/header/PageHeader';
 import Home from '@/pages/home/page/Home';
 import VoiceCollector from '@/pages/data/voice/page/VoiceCollector';
+import WeeklyReportList from '@/pages/weekly-report/page/WeeklyReportList';
+import WeeklyReportDetail from '@/pages/weekly-report/page/WeeklyReportDetail';
 import ChatCollector from '@/pages/data/chat/page/ChatCollector';
 
 export const MainRoutes: RouteObject[] = [
@@ -23,6 +25,19 @@ export const MainRoutes: RouteObject[] = [
       {
         path: PATH.CHAT_DATA, // ⬅️ PATH에 CHAT_DATA 추가해놔야 함
         element: <ChatCollector />,
+      },
+    ],
+  },
+  {
+    element: <Layout header={<PageHeader title="주간 보고서" />} />,
+    children: [
+      {
+        path: PATH.WEEKLY_REPORTS,
+        element: <WeeklyReportList />,
+      },
+      {
+        path: PATH.WEEKLY_REPORT_DETAIL(':id'),
+        element: <WeeklyReportDetail />,
       },
     ],
   },

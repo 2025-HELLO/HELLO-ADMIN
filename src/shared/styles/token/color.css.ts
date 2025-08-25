@@ -27,6 +27,10 @@ export const colors = {
   blue08: '#1B49D7',
   blue09: '#2C4A83',
 
+  green01: '#E6F6ED',
+  green02: '#C0FFD1',
+  pink01: '#FFBFBF',
+
   yellow01: '#FFFEDE',
   yellow02: '#FFF9A9',
   yellow03: '#FFF677',
