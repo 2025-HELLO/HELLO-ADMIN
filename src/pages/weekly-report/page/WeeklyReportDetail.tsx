@@ -1,4 +1,10 @@
 import { useParams, useLocation } from 'react-router-dom';
+import screen1 from '@assets/images/screen1.png';
+import screen2 from '@assets/images/screen2.png';
+import screen3 from '@assets/images/screen3.png';
+import screen4 from '@assets/images/screen4.png';
+import screen5 from '@assets/images/screen5.png';
+import screen6 from '@assets/images/screen6.png';
 
 import * as s from './WeeklyReportDetail.css';
 
@@ -88,6 +94,13 @@ const WeeklyReportDetail = () => {
             </li>
           ))}
         </ul>
+      </section>
+      <section className={s.screensSection} aria-label="screenshots">
+        {[screen1, screen2, screen3, screen4, screen5, screen6].map((src, i) => (
+          <div key={i} className={s.screenItem}>
+            <img src={src} alt={`스크린샷 ${i + 1}`} className={s.screenImage} />
+          </div>
+        ))}
       </section>
     </main>
   );

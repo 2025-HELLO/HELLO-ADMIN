@@ -140,3 +140,28 @@ export const dateLabel = style([
     color: colors.black01,
   },
 ]);
+
+export const screensSection = style([
+  layout.flexColumn,
+  {
+    width: CONTENT_WIDTH,
+    gap: '1rem',
+    marginTop: '2rem',
+  },
+]);
+
+export const screenItem = style([
+  {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+]);
+
+export const screenImage = style([
+  {
+    width: '100%',
+    borderRadius: '8px',
+    objectFit: 'cover',
+  },
+]);
