@@ -48,7 +48,7 @@ const ChatCollector: React.FC = () => {
                 <>
                   <p className={styles.uploadTitle}>파일을 첨부하세요</p>
                   <p className={styles.uploadHint}>
-                    지원 형식: <b>.csv</b>
+                    지원 형식: <b>.txt</b>
                   </p>
                 </>
               )}
@@ -57,7 +57,7 @@ const ChatCollector: React.FC = () => {
             <input
               ref={fileInputRef}
               type="file"
-              accept=".csv"
+              accept=".txt"
               className={styles.fileInput}
               onChange={onChangeFile}
             />
