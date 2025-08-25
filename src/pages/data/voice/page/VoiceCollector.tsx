@@ -113,6 +113,7 @@ const VoiceCollector = () => {
   const onSubmit = async () => {
     try {
       await stopRecord();
+      alert('녹음 완료!'); // ✅ 여기 추가
     } finally {
       stopTimer();
       stopVisualizer();
