@@ -9,15 +9,15 @@ const WeeklyReportList = () => {
   const navigate = useNavigate();
 
   const items = [
-    { id: 9, label: '9주차', range: '03.03. ~ 03.09.' },
-    { id: 8, label: '8주차', range: '02.24. ~ 03.02.' },
-    { id: 7, label: '7주차', range: '02.17. ~ 02.23.' },
-    { id: 6, label: '6주차', range: '02.10. ~ 02.16.' },
-    { id: 5, label: '5주차', range: '02.03. ~ 02.09.' },
-    { id: 4, label: '4주차', range: '01.27. ~ 02.02.' },
-    { id: 3, label: '3주차', range: '01.20. ~ 01.26.' },
-    { id: 2, label: '2주차', range: '01.13. ~ 01.19.' },
-    { id: 1, label: '1주차', range: '01.06. ~ 01.12.' },
+    { id: 9, label: '9주차', range: '03.03 ~ 03.09' },
+    { id: 8, label: '8주차', range: '02.24 ~ 03.02' },
+    { id: 7, label: '7주차', range: '02.17 ~ 02.23' },
+    { id: 6, label: '6주차', range: '02.10 ~ 02.16' },
+    { id: 5, label: '5주차', range: '02.03 ~ 02.09' },
+    { id: 4, label: '4주차', range: '01.27 ~ 02.02' },
+    { id: 3, label: '3주차', range: '01.20 ~ 01.26' },
+    { id: 2, label: '2주차', range: '01.13 ~ 01.19' },
+    { id: 1, label: '1주차', range: '01.06 ~ 01.12' },
   ];
 
   return (
