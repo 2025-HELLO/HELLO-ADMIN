@@ -269,3 +269,12 @@ export const medTdX = style([
     fontWeight: 600,
   },
 ]);
+
+export const medNote = style([
+  fonts.body05,
+  {
+    width: CONTENT_WIDTH,
+    marginTop: '1rem',
+    textAlign: 'left',
+  },
+]);
