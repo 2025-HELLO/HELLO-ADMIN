@@ -1,12 +1,8 @@
+import { useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import screen1 from '@assets/images/screen1.png';
-import screen2 from '@assets/images/screen2.png';
-import screen3 from '@assets/images/screen3.png';
-import screen4 from '@assets/images/screen4.png';
-import screen5 from '@assets/images/screen5.png';
-import screen6 from '@assets/images/screen6.png';
 
 import * as s from './WeeklyReportDetail.css';
+import { MED_LIST, MED_RECORDS } from '../mocks/medication';
 
 const WEEK_DAYS = ['월', '화', '수', '목', '금', '토', '일'] as const;
 
@@ -37,6 +33,9 @@ const WeeklyReportDetail = () => {
   const range = state?.range;
 
   const weekDates = getWeekDates(new Date());
+
+  const [selectedMed, setSelectedMed] = useState<(typeof MED_LIST)[number]>(MED_LIST[0]);
+  const medTable = MED_RECORDS[selectedMed];
 
   const medWeek = [
     { day: '월', taken: true },
@@ -95,12 +94,60 @@ const WeeklyReportDetail = () => {
           ))}
         </ul>
       </section>
-      <section className={s.screensSection} aria-label="screenshots">
-        {[screen1, screen2, screen3, screen4, screen5, screen6].map((src, i) => (
-          <div key={i} className={s.screenItem}>
-            <img src={src} alt={`스크린샷 ${i + 1}`} className={s.screenImage} />
+
+      <section className={s.medReportBox}>
+        <div className={s.medReportHeader}>
+          <h3 id="med-detail-title" className={s.medReportTitle}>
+            약별 복약 현황
+          </h3>
+          <label className={s.medSelectLabel}>
+            <span className={s.visuallyHidden}>약 선택</span>
+            <select
+              className={s.medSelect}
+              value={selectedMed}
+              onChange={(e) => setSelectedMed(e.target.value as (typeof MED_LIST)[number])}
+              aria-label="약 선택"
+            >
+              {MED_LIST.map((m) => (
+                <option key={m} value={m}>
+                  {m}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div
+          className={s.medTableWrap}
+          role="table"
+          aria-label={`${selectedMed} 회차별·요일별 복약 현황`}
+        >
+          <div className={s.medTrHead} role="row">
+            <span className={s.medThEmpty} aria-hidden="true">
+              횟수
+            </span>
+            {weekDates.map((_, idx) => (
+              <span key={idx} className={s.medTh} role="columnheader">
+                {WEEK_DAYS[idx]}
+              </span>
+            ))}
           </div>
-        ))}
+          {[0, 1, 2].map((doseIdx) => (
+            <div key={doseIdx} className={s.medTr} role="row">
+              <span className={s.medTd} role="rowheader">
+                {doseIdx + 1}회
+              </span>
+              {medTable.week.map((row) => {
+                const val = row.doses[doseIdx];
+                const cls = val === 'O' ? s.medTdO : val === 'X' ? s.medTdX : s.medTd;
+                return (
+                  <span key={`${row.day}-${doseIdx}`} className={cls} role="cell">
+                    {val}
+                  </span>
+                );
+              })}
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );

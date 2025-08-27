@@ -22,7 +22,7 @@ export const summaryBox = style([
   {
     width: CONTENT_WIDTH,
     height: '136px',
-    backgroundColor: colors.grey10,
+    backgroundColor: colors.grey11,
     borderRadius: '8px',
     padding: '16px',
     gap: '1.5rem',
@@ -71,7 +71,7 @@ export const section = style([
   layout.flexColumn,
   {
     width: CONTENT_WIDTH,
-    backgroundColor: colors.grey10,
+    backgroundColor: colors.grey11,
     borderRadius: '8px',
     padding: '16px',
     gap: '0.75rem',
@@ -141,27 +141,131 @@ export const dateLabel = style([
   },
 ]);
 
-export const screensSection = style([
+export const medReportBox = style([
   layout.flexColumn,
   {
     width: CONTENT_WIDTH,
-    gap: '1rem',
-    marginTop: '2rem',
+    backgroundColor: colors.grey11,
+    borderRadius: '8px',
+    padding: '16px',
+    gap: '0.75rem',
+    marginTop: '1.5rem',
   },
 ]);
 
-export const screenItem = style([
+export const medReportHeader = style([
   {
+    position: 'relative',
     width: '100%',
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
 ]);
 
-export const screenImage = style([
+export const medReportTitle = style([
+  fonts.body01,
+  {
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    textAlign: 'center',
+  },
+]);
+
+export const medSelectLabel = style([
+  {
+    display: 'flex',
+    alignItems: 'center',
+  },
+]);
+
+export const visuallyHidden = style({
+  position: 'absolute',
+  width: '1px',
+  height: '1px',
+  padding: 0,
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  whiteSpace: 'nowrap',
+  border: 0,
+});
+
+export const medSelect = style([
+  {
+    padding: '4px 8px',
+    borderRadius: '4px',
+    border: `1px solid ${colors.grey09}`,
+    fontSize: '13px',
+    backgroundColor: colors.white01,
+    color: colors.black01,
+  },
+]);
+
+export const medTableWrap = style([
+  layout.flexColumn,
   {
     width: '100%',
-    borderRadius: '8px',
-    objectFit: 'cover',
+  },
+]);
+
+export const medTrHead = style([
+  layout.flexBetweenCenter,
+  {
+    padding: '8px 0',
+    borderBottom: `2px dotted ${colors.grey09}`,
+    fontWeight: 600,
+    fontSize: '13px',
+  },
+]);
+
+export const medTr = style([
+  layout.flexBetweenCenter,
+  {
+    padding: '8px 0',
+    borderBottom: `2px dotted ${colors.grey09}`,
+  },
+]);
+
+export const medTh = style([
+  {
+    flex: 1,
+    textAlign: 'center',
+    fontWeight: 600,
+    fontSize: '12px',
+    color: colors.black01,
+  },
+]);
+
+export const medThEmpty = style([
+  medTh,
+  {
+    visibility: 'hidden',
+  },
+]);
+
+export const medTd = style([
+  {
+    flex: 1,
+    textAlign: 'center',
+    fontSize: '12px',
+    color: colors.black01,
+  },
+]);
+
+export const medTdO = style([
+  medTd,
+  {
+    color: colors.green02,
+    fontWeight: 600,
+  },
+]);
+
+export const medTdX = style([
+  medTd,
+  {
+    color: colors.pink01,
+    fontWeight: 600,
   },
 ]);
