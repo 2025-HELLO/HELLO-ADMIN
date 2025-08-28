@@ -29,6 +29,9 @@ const POINT_R = 3.5;
 
 const WakeTimeReport = () => {
   const values = WAKE_WEEK.week.map((d) => toHours(d.time));
+  const avgHours = WAKE_WEEK.avg
+    ? toHours(WAKE_WEEK.avg)
+    : values.reduce((a, b) => a + b, 0) / values.length;
 
   const xAt = (i: number) => {
     const denom = Math.max(values.length - 1, 1);
@@ -48,7 +51,7 @@ const WakeTimeReport = () => {
   return (
     <>
       <h2 className={s.sectionTitleOutside} id="wake-title">
-        ⏰ 기상 시간 리포트
+        🌟 기상 시간 리포트
       </h2>
       <section className={s.section} aria-labelledby="wake-title">
         <figure>
@@ -100,6 +103,16 @@ const WakeTimeReport = () => {
               y2={VB_H - M.bottom}
               stroke={colors.black01}
               strokeWidth={AXIS_STROKE}
+            />
+            <line
+              x1={M.left}
+              x2={M.left + CH_W}
+              y1={yAt(avgHours)}
+              y2={yAt(avgHours)}
+              stroke={colors.blue02}
+              strokeWidth={AXIS_STROKE}
+              strokeDasharray="4 4"
+              opacity={0.9}
             />
 
             <path
