@@ -1,5 +1,5 @@
 import * as s from '../page/WeeklyReportDetail.css';
-import { MEAL_WEEK } from '../mocks/medication';
+import { MEAL_WEEK } from '../mocks/reportData';
 import MealDonut from './MealDonut';
 
 function calcMealPercents() {

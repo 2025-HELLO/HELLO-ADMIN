@@ -1,9 +1,8 @@
 import { useState } from 'react';
 
 import * as s from '../page/WeeklyReportDetail.css';
-import { MED_LIST, MED_RECORDS, MED_TAKEN_WEEK } from '../mocks/medication';
-
-const WEEK_DAYS = ['월', '화', '수', '목', '금', '토', '일'] as const;
+import { MED_LIST, MED_RECORDS, MED_TAKEN_WEEK } from '../mocks/reportData';
+import { DAYS } from '../constants/days';
 
 interface MedicationReportProps {
   weekDates: string[];
@@ -23,8 +22,8 @@ const MedicationReport = ({ weekDates, medWeek }: MedicationReportProps) => {
       <section className={s.section} aria-labelledby="med-title">
         <ul className={s.dotRow}>
           {takenWeek.map((d, idx) => (
-            <li key={WEEK_DAYS[idx]} className={s.dotItem}>
-              <span className={s.dayLabel}>{WEEK_DAYS[idx]}</span>
+            <li key={DAYS[idx]} className={s.dotItem}>
+              <span className={s.dayLabel}>{DAYS[idx]}</span>
               <span
                 className={d.taken ? s.dotTaken : s.dotMissed}
                 role="img"
@@ -68,7 +67,7 @@ const MedicationReport = ({ weekDates, medWeek }: MedicationReportProps) => {
             </span>
             {weekDates.map((_, idx) => (
               <span key={idx} className={s.medTh} role="columnheader">
-                {WEEK_DAYS[idx]}
+                {DAYS[idx]}
               </span>
             ))}
           </div>

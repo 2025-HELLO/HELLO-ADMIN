@@ -74,3 +74,18 @@ export const MEAL_WEEK: MealDay[] = [
   { day: '토', meals: [false, true, false] },
   { day: '일', meals: [true, true, false] },
 ];
+
+export interface WakeDay {
+  day: WeekDay;
+  time: string;
+}
+
+export const WAKE_WEEK: WakeDay[] = [
+  { day: '월', time: '07:10' },
+  { day: '화', time: '06:55' },
+  { day: '수', time: '07:40' },
+  { day: '목', time: '07:05' },
+  { day: '금', time: '06:50' },
+  { day: '토', time: '08:20' },
+  { day: '일', time: '08:00' },
+];
