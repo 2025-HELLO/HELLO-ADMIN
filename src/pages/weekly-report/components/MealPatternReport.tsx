@@ -4,6 +4,9 @@ import MealDonut from './MealDonut';
 
 const calcMealPercents = () => {
   const totalDays = MEAL_WEEK.week.length;
+  if (totalDays === 0) {
+    return [0, 0, 0];
+  }
   const sums = [0, 0, 0];
   MEAL_WEEK.week.forEach((d) => {
     d.meals.forEach((v: boolean, i: number) => {

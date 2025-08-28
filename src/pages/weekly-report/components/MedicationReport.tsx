@@ -12,8 +12,10 @@ const MedicationReport = (props: MedicationReportProps) => {
   const data = MEDICATION_REPORT;
   const weekDatesArr = props.weekDates ?? data.weekDates;
   const takenWeek = props.medWeek ?? data.takenWeek;
-  const [selectedMed, setSelectedMed] = useState<(typeof data.medList)[number]>(data.medList[0]);
-  const medTable = data.records[selectedMed];
+  const [selectedMed, setSelectedMed] = useState<(typeof data.medList)[number] | undefined>(
+    data.medList.length > 0 ? data.medList[0] : undefined,
+  );
+  const medTable = selectedMed ? data.records[selectedMed] : undefined;
 
   return (
     <>
@@ -45,7 +47,7 @@ const MedicationReport = (props: MedicationReportProps) => {
             <span className={s.visuallyHidden}>약 선택</span>
             <select
               className={s.medSelect}
-              value={selectedMed}
+              value={selectedMed ?? ''}
               onChange={(e) => setSelectedMed(e.target.value as (typeof data.medList)[number])}
               aria-label="약 선택"
             >
@@ -77,7 +79,7 @@ const MedicationReport = (props: MedicationReportProps) => {
               <span className={s.medTd} role="rowheader">
                 {doseIdx + 1}회
               </span>
-              {medTable.week.map((row) => {
+              {medTable?.week.map((row) => {
                 const val = row.doses[doseIdx];
                 const cls = val === 'O' ? s.medTdO : s.medTdX;
                 return (

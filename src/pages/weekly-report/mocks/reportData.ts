@@ -215,5 +215,5 @@ export const GAME_REPORT: GameReportSummary = {
   ],
   a: { plays: 7, bestTime: '2분 50초' },
   b: { plays: 7, sentences: 112 },
-  note: '토요일에 가장 많이 게임을 하셨어요! 두 게임 모두 고른 횟수로 즐기셨고, 언어 공부에서 145점 최고 점수를 기록하셨어요 👏',
+  note: '토요일에 가장 많이 게임을 하셨어요! 두 게임 모두 고른 횟수로 즐기셨고, 언어 공부 기록도 안정적이었어요 👏',
 } as const;

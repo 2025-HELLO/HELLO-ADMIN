@@ -523,7 +523,7 @@ export const modalOverlay = style([
     position: 'fixed',
     inset: 0,
     backgroundColor: 'rgba(0,0,0,0.6)',
-    zIndex: zIndex.modal,
+    zIndex: zIndex.overlay,
   },
 ]);
 
