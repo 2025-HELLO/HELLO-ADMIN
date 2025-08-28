@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+
 import * as styles from './ChatCollector.css';
 
 const ChatCollector: React.FC = () => {
