@@ -1,16 +1,17 @@
 import { useState } from 'react';
 
 import * as s from '../page/WeeklyReportDetail.css';
-import { MED_LIST, MED_RECORDS } from '../mocks/medication';
+import { MED_LIST, MED_RECORDS, MED_TAKEN_WEEK } from '../mocks/medication';
 
 const WEEK_DAYS = ['월', '화', '수', '목', '금', '토', '일'] as const;
 
 interface MedicationReportProps {
   weekDates: string[];
-  medWeek: { day: string; taken: boolean }[];
+  medWeek?: { day: string; taken: boolean }[];
 }
 
 const MedicationReport = ({ weekDates, medWeek }: MedicationReportProps) => {
+  const takenWeek = medWeek ?? MED_TAKEN_WEEK;
   const [selectedMed, setSelectedMed] = useState<(typeof MED_LIST)[number]>(MED_LIST[0]);
   const medTable = MED_RECORDS[selectedMed];
 
@@ -21,7 +22,7 @@ const MedicationReport = ({ weekDates, medWeek }: MedicationReportProps) => {
       </h2>
       <section className={s.section} aria-labelledby="med-title">
         <ul className={s.dotRow}>
-          {medWeek.map((d, idx) => (
+          {takenWeek.map((d, idx) => (
             <li key={WEEK_DAYS[idx]} className={s.dotItem}>
               <span className={s.dayLabel}>{WEEK_DAYS[idx]}</span>
               <span

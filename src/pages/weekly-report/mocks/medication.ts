@@ -6,7 +6,7 @@ export type WeekDay = '월' | '화' | '수' | '목' | '금' | '토' | '일';
 
 export interface MedRow {
   day: WeekDay;
-  doses: [DoseMark, DoseMark, DoseMark]; // 1회/2회/3회
+  doses: [DoseMark, DoseMark, DoseMark];
 }
 
 export const MED_RECORDS: Record<MedName, { week: MedRow[] }> = {
@@ -44,3 +44,33 @@ export const MED_RECORDS: Record<MedName, { week: MedRow[] }> = {
     ],
   },
 };
+
+export interface MedTaken {
+  day: WeekDay;
+  taken: boolean;
+}
+
+export const MED_TAKEN_WEEK: MedTaken[] = [
+  { day: '월', taken: true },
+  { day: '화', taken: true },
+  { day: '수', taken: false },
+  { day: '목', taken: true },
+  { day: '금', taken: true },
+  { day: '토', taken: false },
+  { day: '일', taken: true },
+];
+
+export interface MealDay {
+  day: WeekDay;
+  meals: [boolean, boolean, boolean];
+}
+
+export const MEAL_WEEK: MealDay[] = [
+  { day: '월', meals: [true, true, true] },
+  { day: '화', meals: [true, true, false] },
+  { day: '수', meals: [false, true, true] },
+  { day: '목', meals: [true, true, true] },
+  { day: '금', meals: [true, false, true] },
+  { day: '토', meals: [false, true, false] },
+  { day: '일', meals: [true, true, false] },
+];

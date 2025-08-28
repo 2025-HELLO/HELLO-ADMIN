@@ -4,7 +4,7 @@ import { styleVariants } from '@vanilla-extract/css';
 import { colors, fonts } from '@/shared/styles/token';
 import { layout } from '@/shared/styles/token/layout.css';
 
-export const CONTENT_WIDTH = '355px';
+export const CONTENT_WIDTH = '35.5rem';
 
 export const container = style(layout.flexColumnCenter);
 
@@ -21,10 +21,10 @@ export const summaryBox = style([
   layout.flexColumn,
   {
     width: CONTENT_WIDTH,
-    height: '136px',
+    height: '13.6rem',
     backgroundColor: colors.grey11,
     borderRadius: '8px',
-    padding: '16px',
+    padding: '1.6rem',
     gap: '1.5rem',
   },
 ]);
@@ -59,10 +59,9 @@ export const summaryMiniBoxSchedule = style([summaryMiniBox, summaryMiniBoxColor
 
 export const summaryText = style([
   fonts.body03,
-  layout.flexColumn,
+  layout.flexColumnCenter,
   {
     gap: '0.25rem',
-    alignItems: 'center',
     textAlign: 'center',
   },
 ]);
@@ -73,8 +72,16 @@ export const section = style([
     width: CONTENT_WIDTH,
     backgroundColor: colors.grey11,
     borderRadius: '8px',
-    padding: '16px',
+    padding: '1.6rem',
     gap: '0.75rem',
+  },
+]);
+
+export const sectionContent = style([
+  {
+    position: 'relative',
+    paddingTop: '2rem',
+    paddingRight: '6.4rem',
   },
 ]);
 
@@ -103,17 +110,16 @@ export const dotRow = style([
 ]);
 
 export const dotItem = style([
-  layout.flexColumn,
+  layout.flexColumnCenter,
   {
-    alignItems: 'center',
     gap: '0.25rem',
   },
 ]);
 
 export const dot = style([
   {
-    width: '12px',
-    height: '12px',
+    width: '1.2rem',
+    height: '1.2rem',
     borderRadius: '50%',
     backgroundColor: colors.grey09,
   },
@@ -147,7 +153,7 @@ export const medReportBox = style([
     width: CONTENT_WIDTH,
     backgroundColor: colors.grey11,
     borderRadius: '8px',
-    padding: '16px',
+    padding: '1.6rem',
     gap: '0.75rem',
     marginTop: '1.5rem',
   },
@@ -173,19 +179,14 @@ export const medReportTitle = style([
   },
 ]);
 
-export const medSelectLabel = style([
-  {
-    display: 'flex',
-    alignItems: 'center',
-  },
-]);
+export const medSelectLabel = style(layout.flexAlignCenter);
 
 export const visuallyHidden = style({
   position: 'absolute',
-  width: '1px',
-  height: '1px',
+  width: '0.1rem',
+  height: '0.1rem',
   padding: 0,
-  margin: '-1px',
+  margin: '-0.1rem',
   overflow: 'hidden',
   clip: 'rect(0, 0, 0, 0)',
   whiteSpace: 'nowrap',
@@ -193,11 +194,11 @@ export const visuallyHidden = style({
 });
 
 export const medSelect = style([
+  fonts.body04,
   {
-    padding: '4px 8px',
+    padding: '0.4rem 0.8rem',
     borderRadius: '4px',
     border: `1px solid ${colors.grey09}`,
-    fontSize: '13px',
     backgroundColor: colors.white01,
     color: colors.black01,
   },
@@ -212,28 +213,26 @@ export const medTableWrap = style([
 
 export const medTrHead = style([
   layout.flexBetweenCenter,
+  fonts.body01,
   {
-    padding: '8px 0',
+    padding: '0.8rem 0',
     borderBottom: `2px dotted ${colors.grey09}`,
-    fontWeight: 600,
-    fontSize: '13px',
   },
 ]);
 
 export const medTr = style([
   layout.flexBetweenCenter,
   {
-    padding: '8px 0',
+    padding: '0.8rem 0',
     borderBottom: `2px dotted ${colors.grey09}`,
   },
 ]);
 
 export const medTh = style([
+  fonts.body04,
   {
     flex: 1,
     textAlign: 'center',
-    fontWeight: 600,
-    fontSize: '12px',
     color: colors.black01,
   },
 ]);
@@ -246,10 +245,10 @@ export const medThEmpty = style([
 ]);
 
 export const medTd = style([
+  fonts.body04,
   {
     flex: 1,
     textAlign: 'center',
-    fontSize: '12px',
     color: colors.black01,
   },
 ]);
@@ -258,7 +257,6 @@ export const medTdO = style([
   medTd,
   {
     color: colors.green02,
-    fontWeight: 600,
   },
 ]);
 
@@ -266,7 +264,6 @@ export const medTdX = style([
   medTd,
   {
     color: colors.pink01,
-    fontWeight: 600,
   },
 ]);
 
@@ -278,3 +275,70 @@ export const medNote = style([
     textAlign: 'left',
   },
 ]);
+
+export const mealRow = style([
+  layout.flexBetweenCenter,
+  {
+    width: '100%',
+    gap: '1rem',
+    flexWrap: 'nowrap',
+  },
+]);
+
+export const donutBox = style([
+  layout.flexCenter,
+  {
+    position: 'relative',
+    width: '8.8rem',
+    height: '8.8rem',
+    flex: '0 0 8.8rem',
+  },
+]);
+
+export const donutCenter = style([
+  fonts.body01,
+  {
+    position: 'absolute',
+  },
+]);
+
+export const donutPercent = style([
+  fonts.caption02,
+  {
+    position: 'absolute',
+    fontWeight: 600,
+    zIndex: 1,
+    pointerEvents: 'none',
+    fontSize: '11px',
+  },
+]);
+
+export const legend = style([
+  layout.flexColumn,
+  {
+    gap: '0.5rem',
+    position: 'absolute',
+    top: '1.2rem',
+    right: '1.2rem',
+    alignItems: 'flex-end',
+  },
+]);
+
+export const legendItem = style([
+  layout.flexCenter,
+  {
+    gap: '0.5rem',
+  },
+]);
+
+export const legendDot = style([
+  {
+    width: '0.8rem',
+    height: '0.8rem',
+    borderRadius: '50%',
+  },
+]);
+
+export const legendDotOk = style([legendDot, { backgroundColor: colors.green02 }]);
+
+export const legendDotNo = style([legendDot, { backgroundColor: colors.pink01 }]);

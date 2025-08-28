@@ -1,7 +1,7 @@
 import { useParams, useLocation } from 'react-router-dom';
 
 import * as s from './WeeklyReportDetail.css';
-import MedicationReport from '../\bcomponents/MedicationReport';
+import { MedicationReport, MealPatternReport } from '../components';
 
 interface DetailState {
   range?: string;
@@ -30,16 +30,6 @@ const WeeklyReportDetail = () => {
   const range = state?.range;
 
   const weekDates = getWeekDates(new Date());
-
-  const medWeek = [
-    { day: '월', taken: true },
-    { day: '화', taken: true },
-    { day: '수', taken: false },
-    { day: '목', taken: true },
-    { day: '금', taken: true },
-    { day: '토', taken: false },
-    { day: '일', taken: true },
-  ];
 
   const summaryItems = [
     { label: '복약', percent: 90, className: s.summaryMiniBoxMedication },
@@ -70,7 +60,8 @@ const WeeklyReportDetail = () => {
         </ul>
       </section>
 
-      <MedicationReport weekDates={weekDates} medWeek={medWeek} />
+      <MedicationReport weekDates={weekDates} />
+      <MealPatternReport />
     </main>
   );
 };
