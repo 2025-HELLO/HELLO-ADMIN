@@ -1,25 +1,15 @@
-import { useEffect, useState } from 'react';
+import { overlay } from 'overlay-kit';
 
 import * as s from '../page/WeeklyReportDetail.css';
 import { REMINISCENCE_SUMMARY } from '../mocks/reportData';
+import ReminiscenceDialog, { type ReminItem } from './ReminiscenceDialog';
 
 const ReminiscenceReport = () => {
-  const [openId, setOpenId] = useState<string | null>(null);
-
-  const openModal = (id: string) => setOpenId(id);
-  const closeModal = () => setOpenId(null);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        closeModal();
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
-
-  const active = REMINISCENCE_SUMMARY.items.find((it) => it.id === openId) || null;
+  const openDialog = (item: ReminItem) => {
+    overlay.open(({ isOpen, close }) => (
+      <ReminiscenceDialog open={isOpen} item={item} onClose={close} />
+    ));
+  };
 
   return (
     <>
@@ -31,39 +21,29 @@ const ReminiscenceReport = () => {
       </div>
 
       <div className={s.reminList}>
-        {REMINISCENCE_SUMMARY.items.map((it) => (
+        {REMINISCENCE_SUMMARY.items.map((i: ReminItem) => (
           <article
-            key={it.id}
+            key={i.id}
             className={s.reminCard}
-            onClick={() => openModal(it.id)}
+            onClick={() => openDialog(i)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openDialog(i);
+              }
+            }}
+            tabIndex={0}
             role="button"
-            aria-label={`${it.date} 회상 이야기 열기`}
+            aria-label={`${i.date} 회상 이야기 열기`}
           >
-            <div className={s.reminDate}>📅 {it.date}</div>
-            <div className={s.reminQuote}>{it.preview}</div>
+            <div className={s.reminDate}>📅 {i.date}</div>
+            <div className={s.reminQuote}>{i.preview}</div>
             <div className={s.moreLink} aria-hidden>
               자세히 보기 →
             </div>
           </article>
         ))}
       </div>
-
-      {active && (
-        <div
-          className={s.modalOverlay}
-          onClick={closeModal}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="remin-modal-title"
-        >
-          <div className={s.modalPanel} onClick={(e) => e.stopPropagation()}>
-            <div id="remin-modal-title" className={s.modalHeader}>
-              📆 2025년 {active.date}
-            </div>
-            <div className={s.quoteBlock}>{active.content}</div>
-          </div>
-        </div>
-      )}
     </>
   );
 };
