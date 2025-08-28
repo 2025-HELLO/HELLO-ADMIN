@@ -8,6 +8,7 @@ import {
   ScheduleReport,
   ReminiscenceReport,
 } from '../components';
+import GameReport from '../components/GameReport';
 
 interface DetailState {
   range?: string;
@@ -71,6 +72,7 @@ const WeeklyReportDetail = () => {
       <WakeTimeReport />
       <ScheduleReport />
       <ReminiscenceReport />
+      <GameReport />
     </main>
   );
 };

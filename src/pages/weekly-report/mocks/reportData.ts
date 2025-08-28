@@ -150,3 +150,35 @@ export const REMINISCENCE_SUMMARY: ReminiscenceSummary = {
   ],
   note: '이번 주 부모님의 기억 속 이야기 2편이 도착했어요.',
 } as const;
+
+export interface GameDayCount {
+  day: WeekDay;
+  match: number;
+  lang: number;
+}
+
+export interface GameReportSummary {
+  titleA: string;
+  titleB: string;
+  days: GameDayCount[];
+  a: { plays: number; bestTime: string };
+  b: { plays: number; sentences: number };
+  note: string;
+}
+
+export const GAME_REPORT: GameReportSummary = {
+  titleA: '같은 그림 찾기',
+  titleB: '언어 공부',
+  days: [
+    { day: '월', match: 6, lang: 3 },
+    { day: '화', match: 8, lang: 10 },
+    { day: '수', match: 9, lang: 9 },
+    { day: '목', match: 8, lang: 11 },
+    { day: '금', match: 2, lang: 3 },
+    { day: '토', match: 14, lang: 7 },
+    { day: '일', match: 5, lang: 6 },
+  ],
+  a: { plays: 7, bestTime: '2분 50초' },
+  b: { plays: 7, sentences: 112 },
+  note: '토요일에 가장 많이 게임을 하셨어요! 두 게임 모두 고른 횟수로 즐기셨고, 언어 공부에서 145점 최고 점수를 기록하셨어요 👏',
+} as const;

@@ -6,13 +6,18 @@ import { layout } from '@/shared/styles/token/layout.css';
 
 export const CONTENT_WIDTH = '35.5rem';
 
-export const container = style(layout.flexColumnCenter);
+export const container = style([
+  layout.flexColumnCenter,
+  {
+    padding: '2rem 0',
+  },
+]);
 
 export const title = style([
   fonts.title03,
   {
     width: CONTENT_WIDTH,
-    margin: '2rem 0',
+    marginBottom: '2rem',
     textAlign: 'left',
   },
 ]);
@@ -424,7 +429,7 @@ export const chevronBtn = style([
   },
 ]);
 
-export const reminList = style([layout.flexColumn, { gap: '1.2rem', margin: '3rem 0' }]);
+export const reminList = style([layout.flexColumn, { gap: '1.2rem', margin: '2rem 0' }]);
 
 export const reminCard = style([
   layout.flexColumn,
@@ -443,6 +448,74 @@ export const reminDate = style([fonts.body02, layout.flexAlignCenter, { gap: '0.
 export const reminQuote = style([fonts.body05]);
 
 export const moreLink = style([fonts.caption02, { textAlign: 'right' }]);
+
+export const gameChart = style([
+  {
+    width: '100%',
+    height: '18rem',
+  },
+]);
+
+export const gameSubtitle = style([
+  fonts.body02,
+  {
+    textAlign: 'center',
+    marginBottom: '0.25rem',
+  },
+]);
+
+export const gameLegend = style([
+  layout.flexAlignCenter,
+  {
+    gap: '1rem',
+    margin: '0.5rem 0 0.5rem auto',
+  },
+]);
+
+export const gameLegendItem = style([layout.flexAlignCenter, { gap: '0.4rem' }]);
+
+export const gameDotA = style([
+  {
+    width: '0.7rem',
+    height: '0.7rem',
+    borderRadius: '50%',
+    backgroundColor: colors.yellow04,
+  },
+]);
+
+export const gameDotB = style([
+  {
+    width: '0.7rem',
+    height: '0.7rem',
+    borderRadius: '50%',
+    backgroundColor: colors.blue04,
+  },
+]);
+
+export const gameCards = style([
+  layout.flexBetweenCenter,
+  { width: '100%', gap: '1rem', marginTop: '1rem' },
+]);
+
+export const gameCard = style([
+  layout.flexColumn,
+  {
+    flex: 1,
+    backgroundColor: 'transparent',
+    borderRadius: '10px',
+    padding: '1rem 3rem',
+    gap: '0.6rem',
+    border: `2px solid ${colors.blue02}`,
+  },
+]);
+
+export const gameCardTitle = style([
+  fonts.body03,
+  {
+    whiteSpace: 'nowrap',
+  },
+]);
+export const gameCardMeta = style([fonts.caption02]);
 
 export const modalOverlay = style([
   layout.flexCenter,
