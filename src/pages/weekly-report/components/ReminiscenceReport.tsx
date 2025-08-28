@@ -1,21 +1,13 @@
-import { useOverlay } from '@toss/use-overlay';
+import { overlay } from 'overlay-kit';
 
 import * as s from '../page/WeeklyReportDetail.css';
 import { REMINISCENCE_SUMMARY } from '../mocks/reportData';
 import ReminiscenceDialog, { type ReminItem } from './ReminiscenceDialog';
 
 const ReminiscenceReport = () => {
-  const overlay = useOverlay();
-
   const openDialog = (item: ReminItem) => {
     overlay.open(({ isOpen, close }) => (
-      <ReminiscenceDialog
-        open={isOpen}
-        item={item}
-        onClose={() => {
-          close();
-        }}
-      />
+      <ReminiscenceDialog open={isOpen} item={item} onClose={close} />
     ));
   };
 
@@ -34,6 +26,13 @@ const ReminiscenceReport = () => {
             key={i.id}
             className={s.reminCard}
             onClick={() => openDialog(i)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openDialog(i);
+              }
+            }}
+            tabIndex={0}
             role="button"
             aria-label={`${i.date} 회상 이야기 열기`}
           >

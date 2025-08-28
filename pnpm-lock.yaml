@@ -11,15 +11,15 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.83.0
         version: 5.85.5(react@19.1.1)
-      '@toss/use-overlay':
-        specifier: ^1.4.2
-        version: 1.4.2(react@19.1.1)
       '@vanilla-extract/css':
         specifier: ^1.17.4
         version: 1.17.4
       axios:
         specifier: ^1.11.0
         version: 1.11.0
+      overlay-kit:
+        specifier: ^1.8.5
+        version: 1.8.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react:
         specifier: ^19.1.0
         version: 19.1.1
@@ -748,12 +748,6 @@ packages:
     resolution: {integrity: sha512-/X4EFNcnPiSs8wM2v+b6DqS5mmGeuJQvxBglmDxl6ZQb5V26ouD2SJYAcC3VjbNwqhY2zjxVD15rDA5nGbMn3A==}
     peerDependencies:
       react: ^18 || ^19
-
-  '@toss/use-overlay@1.4.2':
-    resolution: {integrity: sha512-OYJKSKkldho8qrJR0xMJLpz85H68+E+y6H3y/N0XUed/b0ytbfU+fuxcPd14uiC8H0xzliTGBlY8GQP9Z/lteQ==}
-    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
-    peerDependencies:
-      react: ^16.8 || ^17 || ^18
 
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -1861,6 +1855,12 @@ packages:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
 
+  overlay-kit@1.8.5:
+    resolution: {integrity: sha512-BNtfOsfMNzo22x+uMNtV8nix53VTbA0XMENtwdvaEUmtXCjUE6go2xK4XSlNnSGyQfmB6c04uUCuFQtS5ZAAEQ==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18 || ^19
+      react-dom: ^16.8 || ^17 || ^18 || ^19
+
   own-keys@1.0.1:
     resolution: {integrity: sha512-qFOyK5PjiWZd+QQIh+1jhdb9LpxTF0qs7Pm8o5QHYZ0M3vKqSqzsZaEB6oWlxZ+q2sJBMI/Ktgd2N5ZwQoRHfg==}
     engines: {node: '>= 0.4'}
@@ -2849,10 +2849,6 @@ snapshots:
   '@tanstack/react-query@5.85.5(react@19.1.1)':
     dependencies:
       '@tanstack/query-core': 5.85.5
-      react: 19.1.1
-
-  '@toss/use-overlay@1.4.2(react@19.1.1)':
-    dependencies:
       react: 19.1.1
 
   '@trysound/sax@0.2.0': {}
@@ -4230,6 +4226,11 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
       word-wrap: 1.2.5
+
+  overlay-kit@1.8.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+    dependencies:
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
 
   own-keys@1.0.1:
     dependencies:

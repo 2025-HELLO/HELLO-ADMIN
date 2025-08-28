@@ -28,7 +28,7 @@ const ReminiscenceDialog = ({ open, item, onClose }: Props) => {
     >
       <div className={s.modalPanel} onClick={(e) => e.stopPropagation()}>
         <div id="remin-modal-title" className={s.modalHeader}>
-          📆 2025년 {item.date}
+          📆 {item.date}
         </div>
         <div className={s.quoteBlock}>{item.content}</div>
       </div>
