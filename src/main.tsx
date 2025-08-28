@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { OverlayProvider } from '@toss/use-overlay';
+import { OverlayProvider } from 'overlay-kit';
 
 import App from './App.tsx';
 
