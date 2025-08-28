@@ -23,7 +23,7 @@ const CH_W = VB_W - M.left - M.right;
 const CH_H = VB_H - M.top - M.bottom;
 
 const WakeTimeReport = () => {
-  const values = WAKE_WEEK.map((d) => toHours(d.time));
+  const values = WAKE_WEEK.week.map((d) => toHours(d.time));
 
   const xAt = (i: number) => M.left + (CH_W * i) / (values.length - 1);
   const yAt = (h: number) => {
@@ -71,16 +71,16 @@ const WakeTimeReport = () => {
             </g>
           ))}
 
-          {DAYS.map((d, i) => (
+          {WAKE_WEEK.week.map((_, i) => (
             <text
-              key={d}
+              key={i}
               x={xAt(i)}
               y={VB_H - 12}
               fontSize={12}
               textAnchor="middle"
               fill={colors.black01}
             >
-              {d}
+              {DAYS[i]}
             </text>
           ))}
 
@@ -108,10 +108,7 @@ const WakeTimeReport = () => {
           ))}
         </svg>
       </section>
-      <div className={s.medNote}>
-        이번 주 평균 기상 시간은 7시 30분으로 안정적이에요. 금요일엔 9시에 일어나신 점만 제외하면
-        전체적으로 규칙적인 패턴이에요!
-      </div>
+      <div className={s.medNote}>{WAKE_WEEK.note}</div>
     </>
   );
 };

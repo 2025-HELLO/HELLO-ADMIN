@@ -1,12 +1,26 @@
+import { DAYS } from '../constants/days';
+export type WeekDay = (typeof DAYS)[number];
+
 export const MED_LIST = ['혈압약 A', '오메가3', '비타민B'] as const;
 export type MedName = (typeof MED_LIST)[number];
-
-export type DoseMark = 'O' | 'X' | '-';
-export type WeekDay = '월' | '화' | '수' | '목' | '금' | '토' | '일';
+export type DoseMark = 'O' | 'X';
 
 export interface MedRow {
   day: WeekDay;
   doses: [DoseMark, DoseMark, DoseMark];
+}
+
+export interface MedTaken {
+  day: WeekDay;
+  taken: boolean;
+}
+
+export interface MedicationReportData {
+  weekDates: string[];
+  takenWeek: MedTaken[];
+  medList: readonly MedName[];
+  records: Record<MedName, { week: MedRow[] }>;
+  note: string;
 }
 
 export const MED_RECORDS: Record<MedName, { week: MedRow[] }> = {
@@ -23,32 +37,27 @@ export const MED_RECORDS: Record<MedName, { week: MedRow[] }> = {
   },
   오메가3: {
     week: [
-      { day: '월', doses: ['O', '-', '-'] },
-      { day: '화', doses: ['O', '-', '-'] },
-      { day: '수', doses: ['X', '-', '-'] },
-      { day: '목', doses: ['O', '-', '-'] },
-      { day: '금', doses: ['O', '-', '-'] },
-      { day: '토', doses: ['O', '-', '-'] },
-      { day: '일', doses: ['X', '-', '-'] },
+      { day: '월', doses: ['O', 'X', 'X'] },
+      { day: '화', doses: ['O', 'X', 'X'] },
+      { day: '수', doses: ['X', 'X', 'X'] },
+      { day: '목', doses: ['O', 'X', 'X'] },
+      { day: '금', doses: ['O', 'X', 'X'] },
+      { day: '토', doses: ['O', 'X', 'X'] },
+      { day: '일', doses: ['X', 'X', 'X'] },
     ],
   },
   비타민B: {
     week: [
-      { day: '월', doses: ['O', '-', '-'] },
-      { day: '화', doses: ['O', '-', '-'] },
-      { day: '수', doses: ['O', '-', '-'] },
-      { day: '목', doses: ['O', '-', '-'] },
-      { day: '금', doses: ['O', '-', '-'] },
-      { day: '토', doses: ['O', '-', '-'] },
-      { day: '일', doses: ['O', '-', '-'] },
+      { day: '월', doses: ['O', 'X', 'X'] },
+      { day: '화', doses: ['O', 'X', 'X'] },
+      { day: '수', doses: ['O', 'X', 'X'] },
+      { day: '목', doses: ['O', 'X', 'X'] },
+      { day: '금', doses: ['O', 'X', 'X'] },
+      { day: '토', doses: ['O', 'X', 'X'] },
+      { day: '일', doses: ['O', 'X', 'X'] },
     ],
   },
 };
-
-export interface MedTaken {
-  day: WeekDay;
-  taken: boolean;
-}
 
 export const MED_TAKEN_WEEK: MedTaken[] = [
   { day: '월', taken: true },
@@ -60,35 +69,61 @@ export const MED_TAKEN_WEEK: MedTaken[] = [
   { day: '일', taken: true },
 ];
 
+export const MEDICATION_REPORT: MedicationReportData = {
+  weekDates: ['07.21', '07.22', '07.23', '07.24', '07.25', '07.26', '07.27'],
+  takenWeek: MED_TAKEN_WEEK,
+  medList: MED_LIST,
+  records: MED_RECORDS,
+  note: '이번 주 약 복용, 정말 잘 하셨어요! 특히 저녁은 빠짐없이 챙기셨어요. 화요일 하루만 놓치신 게 있어요. 혹시 그날 무슨 일 있으셨을까요?',
+} as const;
+
 export interface MealDay {
   day: WeekDay;
   meals: [boolean, boolean, boolean];
 }
 
-export const MEAL_WEEK: MealDay[] = [
-  { day: '월', meals: [true, true, true] },
-  { day: '화', meals: [true, true, false] },
-  { day: '수', meals: [false, true, true] },
-  { day: '목', meals: [true, true, true] },
-  { day: '금', meals: [true, false, true] },
-  { day: '토', meals: [false, true, false] },
-  { day: '일', meals: [true, true, false] },
-];
+export interface MealWeekSummary {
+  week: MealDay[];
+  note: string;
+}
+
+export const MEAL_WEEK: MealWeekSummary = {
+  week: [
+    { day: '월', meals: [true, true, true] },
+    { day: '화', meals: [true, true, false] },
+    { day: '수', meals: [false, true, true] },
+    { day: '목', meals: [true, true, true] },
+    { day: '금', meals: [true, false, true] },
+    { day: '토', meals: [false, true, false] },
+    { day: '일', meals: [true, true, false] },
+  ],
+  note: '이번 주에는 점심 식사는 거의 매일 잘 챙기셨어요 (95%). 다만, 아침(45%)과 저녁(55%) 식사는 종종 건너뛰신 날이 있었어요. 가볍게라도 드시면 좋아요 :)',
+} as const;
 
 export interface WakeDay {
   day: WeekDay;
   time: string;
 }
 
-export const WAKE_WEEK: WakeDay[] = [
-  { day: '월', time: '07:10' },
-  { day: '화', time: '06:55' },
-  { day: '수', time: '07:40' },
-  { day: '목', time: '07:05' },
-  { day: '금', time: '06:50' },
-  { day: '토', time: '08:20' },
-  { day: '일', time: '08:00' },
-];
+export interface WakeWeekSummary {
+  week: WakeDay[];
+  note: string;
+  avg?: string;
+}
+
+export const WAKE_WEEK: WakeWeekSummary = {
+  week: [
+    { day: '월', time: '07:10' },
+    { day: '화', time: '06:55' },
+    { day: '수', time: '07:40' },
+    { day: '목', time: '07:05' },
+    { day: '금', time: '06:50' },
+    { day: '토', time: '08:20' },
+    { day: '일', time: '08:00' },
+  ],
+  note: '이번 주 평균 기상 시간은 7시 30분으로 안정적이에요. 금요일엔 9시에 일어나신 점만 제외하면 전체적으로 규칙적인 패턴이에요!',
+  avg: '07:30',
+} as const;
 
 export interface CompletedSchedule {
   date: string;

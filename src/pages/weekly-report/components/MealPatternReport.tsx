@@ -3,9 +3,9 @@ import { MEAL_WEEK } from '../mocks/reportData';
 import MealDonut from './MealDonut';
 
 function calcMealPercents() {
-  const totalDays = MEAL_WEEK.length;
+  const totalDays = MEAL_WEEK.week.length;
   const sums = [0, 0, 0];
-  MEAL_WEEK.forEach((d) => {
+  MEAL_WEEK.week.forEach((d) => {
     d.meals.forEach((v: boolean, i: number) => {
       if (v) {
         sums[i] += 1;
@@ -48,10 +48,7 @@ const MealPatternReport = () => {
           </div>
         </div>
       </section>
-      <div className={s.medNote}>
-        이번 주에는 점심 식사는 거의 매일 잘 챙기셨어요 (95%). 다만, 아침(45%)과 저녁(55%) 식사는
-        종종 건너뛰신 날이 있었어요. 가볍게라도 드시면 좋아요 :)
-      </div>
+      <div className={s.medNote}>{MEAL_WEEK.note}</div>
     </>
   );
 };

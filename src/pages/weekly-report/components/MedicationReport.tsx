@@ -1,18 +1,19 @@
 import { useState } from 'react';
 
 import * as s from '../page/WeeklyReportDetail.css';
-import { MED_LIST, MED_RECORDS, MED_TAKEN_WEEK } from '../mocks/reportData';
-import { DAYS } from '../constants/days';
+import { MEDICATION_REPORT } from '../mocks/reportData';
 
 interface MedicationReportProps {
-  weekDates: string[];
+  weekDates?: string[];
   medWeek?: { day: string; taken: boolean }[];
 }
 
-const MedicationReport = ({ weekDates, medWeek }: MedicationReportProps) => {
-  const takenWeek = medWeek ?? MED_TAKEN_WEEK;
-  const [selectedMed, setSelectedMed] = useState<(typeof MED_LIST)[number]>(MED_LIST[0]);
-  const medTable = MED_RECORDS[selectedMed];
+const MedicationReport = (props: MedicationReportProps) => {
+  const data = MEDICATION_REPORT;
+  const weekDatesArr = props.weekDates ?? data.weekDates;
+  const takenWeek = props.medWeek ?? data.takenWeek;
+  const [selectedMed, setSelectedMed] = useState<(typeof data.medList)[number]>(data.medList[0]);
+  const medTable = data.records[selectedMed];
 
   return (
     <>
@@ -22,14 +23,14 @@ const MedicationReport = ({ weekDates, medWeek }: MedicationReportProps) => {
       <section className={s.section} aria-labelledby="med-title">
         <ul className={s.dotRow}>
           {takenWeek.map((d, idx) => (
-            <li key={DAYS[idx]} className={s.dotItem}>
-              <span className={s.dayLabel}>{DAYS[idx]}</span>
+            <li key={idx} className={s.dotItem}>
+              <span className={s.dayLabel}>{d.day}</span>
               <span
                 className={d.taken ? s.dotTaken : s.dotMissed}
                 role="img"
                 aria-label={d.taken ? '복용함' : '미복용'}
               />
-              <time className={s.dateLabel}>{weekDates[idx]}</time>
+              <time className={s.dateLabel}>{weekDatesArr[idx]}</time>
             </li>
           ))}
         </ul>
@@ -45,10 +46,10 @@ const MedicationReport = ({ weekDates, medWeek }: MedicationReportProps) => {
             <select
               className={s.medSelect}
               value={selectedMed}
-              onChange={(e) => setSelectedMed(e.target.value as (typeof MED_LIST)[number])}
+              onChange={(e) => setSelectedMed(e.target.value as (typeof data.medList)[number])}
               aria-label="약 선택"
             >
-              {MED_LIST.map((m) => (
+              {data.medList.map((m) => (
                 <option key={m} value={m}>
                   {m}
                 </option>
@@ -65,9 +66,9 @@ const MedicationReport = ({ weekDates, medWeek }: MedicationReportProps) => {
             <span className={s.medThEmpty} aria-hidden="true">
               횟수
             </span>
-            {weekDates.map((_, idx) => (
+            {weekDatesArr.map((_, idx) => (
               <span key={idx} className={s.medTh} role="columnheader">
-                {DAYS[idx]}
+                {takenWeek[idx].day}
               </span>
             ))}
           </div>
@@ -78,7 +79,7 @@ const MedicationReport = ({ weekDates, medWeek }: MedicationReportProps) => {
               </span>
               {medTable.week.map((row) => {
                 const val = row.doses[doseIdx];
-                const cls = val === 'O' ? s.medTdO : val === 'X' ? s.medTdX : s.medTd;
+                const cls = val === 'O' ? s.medTdO : s.medTdX;
                 return (
                   <span key={`${row.day}-${doseIdx}`} className={cls} role="cell">
                     {val}
@@ -89,10 +90,7 @@ const MedicationReport = ({ weekDates, medWeek }: MedicationReportProps) => {
           ))}
         </div>
       </section>
-      <div className={s.medNote}>
-        이번 주 약 복용, 정말 잘 하셨어요! 특히 저녁은 빠짐없이 챙기셨어요. 화요일 하루만 놓치신 게
-        있어요. 혹시 그날 무슨 일 있으셨을까요?
-      </div>
+      <div className={s.medNote}>{data.note}</div>
     </>
   );
 };

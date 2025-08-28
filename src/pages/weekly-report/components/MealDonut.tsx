@@ -1,5 +1,7 @@
 import * as s from '../page/WeeklyReportDetail.css';
 
+import { colors } from '@/shared/styles/token/color.css';
+
 interface MealDonutProps {
   label: string;
   ok: number;
@@ -20,13 +22,13 @@ const MealDonut = ({ label, ok }: MealDonutProps) => {
     <div className={s.donutBox} aria-label={`${label} 섭취 비율`}>
       <svg width={88} height={88} viewBox="0 0 88 88" role="img">
         <g transform="rotate(-90 44 44)">
-          <circle cx={44} cy={44} r={R} fill="none" stroke="#E6E8EC" strokeWidth={10} />
+          <circle cx={44} cy={44} r={R} fill="none" stroke={colors.grey10} strokeWidth={10} />
           <circle
             cx={44}
             cy={44}
             r={R}
             fill="none"
-            stroke="#7AD7A0"
+            stroke={colors.green02}
             strokeWidth={10}
             strokeDasharray={arcDash(ok)}
             strokeLinecap="butt"
@@ -36,7 +38,7 @@ const MealDonut = ({ label, ok }: MealDonutProps) => {
             cy={44}
             r={R}
             fill="none"
-            stroke="#FFA7B3"
+            stroke={colors.pink01}
             strokeWidth={10}
             strokeDasharray={arcDash(no)}
             strokeDashoffset={(ok / 100) * C * -1}
