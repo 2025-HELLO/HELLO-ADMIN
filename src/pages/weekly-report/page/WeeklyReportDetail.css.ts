@@ -540,6 +540,22 @@ export const modalPanel = style([
   },
 ]);
 
+export const modalPanelEnter = style([
+  {
+    opacity: 1,
+    transform: 'translateY(0)',
+    transition: 'opacity 180ms ease, transform 180ms ease',
+  },
+]);
+
+export const modalPanelExit = style([
+  {
+    opacity: 0,
+    transform: 'translateY(8px)',
+    transition: 'opacity 180ms ease, transform 180ms ease',
+  },
+]);
+
 export const modalHeader = style([layout.flexAlignCenter, fonts.body01, { gap: '0.6rem' }]);
 
 export const quoteBlock = style([fonts.body05, { whiteSpace: 'pre-line' }]);
