@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { styleVariants } from '@vanilla-extract/css';
 
-import { colors, fonts } from '@/shared/styles/token';
+import { colors, fonts, zIndex } from '@/shared/styles/token';
 import { layout } from '@/shared/styles/token/layout.css';
 
 export const CONTENT_WIDTH = '35.5rem';
@@ -423,3 +423,50 @@ export const chevronBtn = style([
     lineHeight: 1,
   },
 ]);
+
+export const reminList = style([layout.flexColumn, { gap: '1.2rem', margin: '3rem 0' }]);
+
+export const reminCard = style([
+  layout.flexColumn,
+  {
+    width: CONTENT_WIDTH,
+    backgroundColor: colors.yellow01,
+    borderRadius: '12px',
+    padding: '2rem',
+    gap: '0.8rem',
+    cursor: 'pointer',
+  },
+]);
+
+export const reminDate = style([fonts.body02, layout.flexAlignCenter, { gap: '0.6rem' }]);
+
+export const reminQuote = style([fonts.body05]);
+
+export const moreLink = style([fonts.caption02, { textAlign: 'right' }]);
+
+export const modalOverlay = style([
+  layout.flexCenter,
+  {
+    position: 'fixed',
+    inset: 0,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    zIndex: zIndex.modal,
+  },
+]);
+
+export const modalPanel = style([
+  layout.flexColumn,
+  {
+    width: '96%',
+    maxWidth: CONTENT_WIDTH,
+    backgroundColor: colors.grey12,
+    borderRadius: '16px',
+    padding: '2rem',
+    gap: '1.2rem',
+    border: `4px solid ${colors.yellow04}`,
+  },
+]);
+
+export const modalHeader = style([layout.flexAlignCenter, fonts.body01, { gap: '0.6rem' }]);
+
+export const quoteBlock = style([fonts.body05, { whiteSpace: 'pre-line' }]);

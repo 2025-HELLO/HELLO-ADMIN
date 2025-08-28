@@ -116,3 +116,37 @@ export const SCHEDULE_SUMMARY: ScheduleSummary = {
   ],
   note: '이번 주에는 총 5개의 일정 중 4건을 소화하셨어요. 노래교실과 친구와의 약속 등 다양한 활동에 꾸준히 참여하셨어요.',
 } as const;
+
+export interface ReminiscenceItem {
+  id: string;
+  date: string;
+  preview: string;
+  content: string;
+}
+
+export interface ReminiscenceSummary {
+  total: number;
+  items: ReminiscenceItem[];
+  note: string;
+}
+
+export const REMINISCENCE_SUMMARY: ReminiscenceSummary = {
+  total: 2,
+  items: [
+    {
+      id: '2025-07-21',
+      date: '7월 21일',
+      preview: '“남편과의 첫 만남 이야기 첫문장으로 대체”',
+      content:
+        '그날은 진달래가 활짝 피어 있던 따뜻한 봄날이었어요.\n친구랑 같이 동네 다방에 갔는데, 거기서 지금의 남편을 처음 봤지요.\n하얀 셔츠에 말쑥하게 머리를 빗은 모습이 얼마나 점잖고 멋있어 보이던지...\n첫눈에 마음이 갔어요.\n말도 조곤조곤 잘하고, 농담도 유머 있게 하는데, 괜히 웃음이 나더라고요.\n그날 이후로 그 사람이 계속 생각났어요.\n그렇게 몇 번 더 마주치다가, 용기 내서 먼저 말을 걸어줬고, 그게 우리 인연의 시작이었지요.',
+    },
+    {
+      id: '2025-07-20',
+      date: '7월 20일',
+      preview: '“그날은 진달래가 피어 있던 따뜻한 봄날이었지.”',
+      content:
+        '그날은 진달래가 피어 있던 따뜻한 봄날이었지요.\n오래된 앨범을 정리하다 보니, 그때 찍은 사진들이 참 많더라고요.\n친구들과 함께 공원에서 찍은 사진, 시장 골목에서 웃던 얼굴들...\n사진을 보니 그때의 공기와 햇살이 다시 느껴지는 것만 같았어요.\n그래서 잠깐 산책도 하고, 예전 단골 빵집에도 들렀죠.',
+    },
+  ],
+  note: '이번 주 부모님의 기억 속 이야기 2편이 도착했어요.',
+} as const;

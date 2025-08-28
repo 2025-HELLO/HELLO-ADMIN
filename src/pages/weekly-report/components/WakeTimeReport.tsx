@@ -10,11 +10,7 @@ const toHours = (t: string): number => {
 };
 
 const hoursLabel = (h: number): string => {
-  const hh = Math.floor(h).toString().padStart(2, '0');
-  const mm = Math.round((h % 1) * 60)
-    .toString()
-    .padStart(2, '0');
-  return `${hh}:${mm}`;
+  return String(Math.floor(h));
 };
 
 const MIN_Y = 5;
@@ -22,7 +18,7 @@ const MAX_Y = 10;
 
 const VB_W = 320;
 const VB_H = 180;
-const M = { top: 12, right: 14, bottom: 36, left: 32 };
+const M = { top: 12, right: 14, bottom: 36, left: 35 };
 const CH_W = VB_W - M.left - M.right;
 const CH_H = VB_H - M.top - M.bottom;
 
