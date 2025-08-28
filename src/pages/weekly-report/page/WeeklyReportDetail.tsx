@@ -1,7 +1,7 @@
 import { useParams, useLocation } from 'react-router-dom';
 
 import * as s from './WeeklyReportDetail.css';
-import { MedicationReport, MealPatternReport, WakeTimeReport } from '../components';
+import { MedicationReport, MealPatternReport, WakeTimeReport, ScheduleReport } from '../components';
 
 interface DetailState {
   range?: string;
@@ -63,6 +63,7 @@ const WeeklyReportDetail = () => {
       <MedicationReport weekDates={weekDates} />
       <MealPatternReport />
       <WakeTimeReport />
+      <ScheduleReport />
     </main>
   );
 };

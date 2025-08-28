@@ -9,3 +9,4 @@ export { default as IcRightarrow } from './IcRightarrow';
 export { default as IcSound } from './IcSound';
 export { default as IcStop } from './IcStop';
 export { default as IcTip } from './IcTip';
+export { default as IcUparrow } from './IcUparrow';

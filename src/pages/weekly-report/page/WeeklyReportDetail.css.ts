@@ -342,3 +342,84 @@ export const legendDot = style([
 export const legendDotOk = style([legendDot, { backgroundColor: colors.green02 }]);
 
 export const legendDotNo = style([legendDot, { backgroundColor: colors.pink01 }]);
+
+export const statRow = style([
+  layout.flexBetweenCenter,
+  {
+    width: '100%',
+    gap: '1rem',
+  },
+]);
+
+export const statCard = style([
+  layout.flexColumnCenter,
+  {
+    flex: 1,
+    backgroundColor: colors.grey12,
+    borderRadius: '0.8rem',
+    padding: '1.2rem',
+  },
+]);
+
+export const statLabel = style([
+  fonts.body01,
+  {
+    color: colors.black01,
+    opacity: 0.8,
+    marginBottom: '0.4rem',
+    textAlign: 'center',
+  },
+]);
+
+export const statValue = style([
+  fonts.body02,
+  {
+    textAlign: 'center',
+  },
+]);
+
+export const completedBox = style([
+  layout.flexColumn,
+  {
+    width: '100%',
+    backgroundColor: colors.grey12,
+    borderRadius: '8px',
+    padding: '1.2rem',
+    marginTop: '1rem',
+    gap: '0.8rem',
+  },
+]);
+
+export const completedHeader = style([
+  layout.flexBetweenCenter,
+  fonts.body02,
+  {
+    width: '100%',
+  },
+]);
+
+export const completedList = style([
+  layout.flexColumn,
+  {
+    gap: '0.8rem',
+  },
+]);
+
+export const completedItem = style([
+  layout.flexAlignCenter,
+  fonts.body03,
+  {
+    gap: '0.6rem',
+  },
+]);
+
+export const chevronBtn = style([
+  fonts.body01,
+  {
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    padding: 0,
+    lineHeight: 1,
+  },
+]);

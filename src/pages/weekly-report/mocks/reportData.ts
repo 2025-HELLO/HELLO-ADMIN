@@ -89,3 +89,30 @@ export const WAKE_WEEK: WakeDay[] = [
   { day: '토', time: '08:20' },
   { day: '일', time: '08:00' },
 ];
+
+export interface CompletedSchedule {
+  date: string;
+  time: string;
+  title: string;
+}
+
+export interface ScheduleSummary {
+  total: number;
+  done: number;
+  rate: number;
+  completed: CompletedSchedule[];
+  note: string;
+}
+
+export const SCHEDULE_SUMMARY: ScheduleSummary = {
+  total: 5,
+  done: 4,
+  rate: 80,
+  completed: [
+    { date: '7월 24일', time: '11:30', title: '치과 예약' },
+    { date: '7월 25일', time: '11:30', title: '친구와의 약속' },
+    { date: '7월 25일', time: '13:15', title: '노래교실' },
+    { date: '8월 1일', time: '13:15', title: '노래교실' },
+  ],
+  note: '이번 주에는 총 5개의 일정 중 4건을 소화하셨어요. 노래교실과 친구와의 약속 등 다양한 활동에 꾸준히 참여하셨어요.',
+} as const;
