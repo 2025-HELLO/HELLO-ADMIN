@@ -16,11 +16,11 @@ const ScheduleReport = () => {
       <section className={s.section} aria-labelledby="schedule-title">
         <div className={s.statRow}>
           <div className={s.statCard} aria-label={`총 일정 ${SCHEDULE_SUMMARY.total}건`}>
-            <div className={s.statLabel}>총 일정</div>
-            <div className={s.statValue}>{SCHEDULE_SUMMARY.total}건</div>
+            <h3 className={s.statLabel}>총 일정</h3>
+            <p className={s.statValue}>{SCHEDULE_SUMMARY.total}건</p>
           </div>
           <div className={s.statCard} aria-label={`완료한 일정 ${SCHEDULE_SUMMARY.done}건`}>
-            <div className={s.statLabel}>완료한 일정</div>
+            <h3 className={s.statLabel}>완료한 일정</h3>
             <div className={s.statValue}>{SCHEDULE_SUMMARY.done}건</div>
           </div>
           <div className={s.statCard} aria-label={`수행률 ${SCHEDULE_SUMMARY.rate}%`}>

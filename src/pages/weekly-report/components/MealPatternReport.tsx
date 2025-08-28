@@ -2,7 +2,7 @@ import * as s from '../page/WeeklyReportDetail.css';
 import { MEAL_WEEK } from '../mocks/reportData';
 import MealDonut from './MealDonut';
 
-function calcMealPercents() {
+const calcMealPercents = () => {
   const totalDays = MEAL_WEEK.week.length;
   const sums = [0, 0, 0];
   MEAL_WEEK.week.forEach((d) => {
@@ -14,7 +14,7 @@ function calcMealPercents() {
   });
   const toPct = (n: number) => Math.round((n / totalDays) * 100);
   return [toPct(sums[0]), toPct(sums[1]), toPct(sums[2])];
-}
+};
 
 const labels: [string, string][] = [
   ['아침', 'Breakfast'],
