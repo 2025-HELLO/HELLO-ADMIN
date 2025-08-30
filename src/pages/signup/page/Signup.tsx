@@ -8,36 +8,29 @@ import NotifyStep from '../components/step/NotifyStep';
 import AccountStep from '../components/step/AccountStep';
 import DoneStep from '../components/step/DoneStep';
 
-const STEPS = {
-  Terms: 'Terms',
-  ParentInfo: 'ParentInfo',
-  Notify: 'Notify',
-  Account: 'Account',
-  Done: 'Done',
-} as const;
+const STEP_ORDER = ['Terms', 'ParentInfo', 'Notify', 'Account', 'Done'] as const;
+type StepKey = (typeof STEP_ORDER)[number];
 
-const TermsRenderer: StepComponent = ({ history }) => (
-  <StepLayout current={1}>
-    <TermsStep onNext={() => history.push(STEPS.ParentInfo, {})} />
-  </StepLayout>
-);
-const ParentInfoRenderer: StepComponent = ({ history }) => (
-  <StepLayout current={2}>
-    <ParentInfoStep onNext={() => history.push(STEPS.Notify, {})} />
-  </StepLayout>
-);
-const NotifyRenderer: StepComponent = ({ history }) => (
-  <StepLayout current={3}>
-    <NotifyStep onNext={() => history.push(STEPS.Account, {})} />
-  </StepLayout>
-);
-const AccountRenderer: StepComponent = ({ history }) => (
-  <StepLayout current={4}>
-    <AccountStep onNext={() => history.push(STEPS.Done, {})} />
-  </StepLayout>
-);
+const indexOf = (k: StepKey) => STEP_ORDER.indexOf(k) + 1;
+
+const makeRenderer =
+  (
+    key: Exclude<StepKey, 'Done'>,
+    Comp: React.FC<{ onNext: () => void }>,
+    next: StepKey,
+  ): StepComponent =>
+  ({ history }) => (
+    <StepLayout current={indexOf(key)}>
+      <Comp onNext={() => history.push(next, {})} />
+    </StepLayout>
+  );
+
+const TermsRenderer: StepComponent = makeRenderer('Terms', TermsStep, 'ParentInfo');
+const ParentInfoRenderer: StepComponent = makeRenderer('ParentInfo', ParentInfoStep, 'Notify');
+const NotifyRenderer: StepComponent = makeRenderer('Notify', NotifyStep, 'Account');
+const AccountRenderer: StepComponent = makeRenderer('Account', AccountStep, 'Done');
 const DoneRenderer: StepComponent = () => (
-  <StepLayout current={5}>
+  <StepLayout current={indexOf('Done')}>
     <DoneStep />
   </StepLayout>
 );
@@ -45,7 +38,7 @@ const DoneRenderer: StepComponent = () => (
 const Signup = () => {
   const funnel = useFunnel<SignupSteps>({
     id: 'signup-funnel',
-    initial: { step: STEPS.Terms, context: {} },
+    initial: { step: STEP_ORDER[0], context: {} },
   });
 
   return (
