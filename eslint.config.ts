@@ -43,6 +43,7 @@ export default [
     ignores: ['*.config.js', '*.config.ts'],
     rules: {
       'react/react-in-jsx-scope': 'off',
+      'no-undef': 'off',
 
       'no-console': 'off',
       'no-unused-vars': 'off',
