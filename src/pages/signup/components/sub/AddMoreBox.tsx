@@ -1,4 +1,4 @@
-import * as s from '../page/Signup.css';
+import * as s from '../../page/Signup.css';
 
 interface Props {
   onClick: () => void;
