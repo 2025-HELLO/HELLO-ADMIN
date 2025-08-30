@@ -59,7 +59,7 @@ export const allTerms = style([
   layout.flexAlignCenter,
   formBlock,
   {
-    height: '3.8rem',
+    height: '4rem',
     padding: '0 1.6rem',
     gap: '0.8rem',
     marginBottom: '2.3rem',
@@ -68,7 +68,7 @@ export const allTerms = style([
   },
 ]);
 
-export const allTermsText = style([fonts.caption01, { color: colors.black01 }]);
+export const allTermsText = style([fonts.body04, { color: colors.black01 }]);
 
 export const termsContainer = style([
   layout.flexColumn,
@@ -87,7 +87,7 @@ export const terms = style([
   },
 ]);
 
-export const termsText = style([fonts.caption02, { color: colors.black01 }]);
+export const termsText = style([fonts.body05, { color: colors.black01 }]);
 
 export const inputGroup = recipe({
   base: [layout.flexColumn],
