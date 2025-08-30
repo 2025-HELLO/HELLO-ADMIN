@@ -8,7 +8,7 @@ interface Props {
 const DrugFields = ({ value, onChange }: Props) => (
   <>
     <h2 className={s.subTitle}>복용하는 약 정보</h2>
-    <div className={s.inputGroup}>
+    <div className={s.inputGroup({ size: 'md' })}>
       <label htmlFor="drugName" className={s.inputLabel}>
         약 이름
       </label>

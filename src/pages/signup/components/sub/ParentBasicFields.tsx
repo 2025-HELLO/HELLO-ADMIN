@@ -10,7 +10,7 @@ interface Props {
 const ParentBasicFields = ({ parentName, parentAge, onChangeName, onChangeAge }: Props) => {
   return (
     <>
-      <div className={s.inputGroup}>
+      <div className={s.inputGroup({ size: 'md' })}>
         <label htmlFor="parentName" className={s.inputLabel}>
           성함<span className={s.requiredMark}>*</span>
         </label>
@@ -27,7 +27,7 @@ const ParentBasicFields = ({ parentName, parentAge, onChangeName, onChangeAge }:
         />
       </div>
 
-      <div className={s.inputGroup}>
+      <div className={s.inputGroup({ size: 'md' })}>
         <label htmlFor="parentAge" className={s.inputLabel}>
           나이<span className={s.requiredMark}>*</span>
         </label>

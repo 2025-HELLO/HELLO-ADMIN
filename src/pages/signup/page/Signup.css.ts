@@ -1,8 +1,13 @@
 import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 import { colors, fonts, layout } from '@styles/token';
 
 const formWidth = '30rem';
 
+const formBlock = style({ width: formWidth });
+const textBlock = style({ width: '30rem' });
+
+// 공통 컨테이너
 export const container = style([
   layout.flexColumnCenter,
   {
@@ -10,33 +15,38 @@ export const container = style([
   },
 ]);
 
+// 진행바
 export const progressBarContainer = style([
+  layout.flexJustifyCenter,
   {
-    display: 'flex',
-    justifyContent: 'center',
     marginTop: '2rem',
   },
 ]);
 
+// 공통 텍스트
 export const title = style([
   fonts.title01,
-  { color: colors.black01, width: '30rem', marginBottom: '2.2rem' },
+  textBlock,
+  { color: colors.black01, marginBottom: '2.2rem' },
 ]);
 
 export const subTitle = style([
   fonts.subtitle01,
-  { color: colors.black01, width: '30rem', margin: '1.5rem 0' },
+  textBlock,
+  { color: colors.black01, margin: '1.5rem 0' },
 ]);
 
 export const description = style([
   fonts.body03,
-  { color: colors.black01, width: '30rem', marginBottom: '3.2rem' },
+  textBlock,
+  { color: colors.black01, marginBottom: '3.2rem' },
 ]);
 
+// 약관 동의 스텝
 export const allTerms = style([
   layout.flexAlignCenter,
+  formBlock,
   {
-    width: formWidth,
     height: '3.8rem',
     padding: '0 1.6rem',
     gap: '0.8rem',
@@ -50,16 +60,16 @@ export const allTermsText = style([fonts.caption01, { color: colors.black01 }]);
 
 export const termsContainer = style([
   layout.flexColumn,
+  formBlock,
   {
-    width: formWidth,
     gap: '2.4rem',
   },
 ]);
 
 export const terms = style([
   layout.flexAlignCenter,
+  formBlock,
   {
-    width: formWidth,
     padding: '0 1.6rem',
     gap: '0.8rem',
   },
@@ -67,20 +77,24 @@ export const terms = style([
 
 export const termsText = style([fonts.caption02, { color: colors.black01 }]);
 
-export const inputGroup = style([
-  layout.flexColumn,
-  {
-    marginBottom: '2rem',
+export const inputGroup = recipe({
+  base: [layout.flexColumn],
+  variants: {
+    size: {
+      md: { marginBottom: '2rem' },
+      lg: { marginBottom: '5rem' },
+    },
   },
-]);
+  defaultVariants: { size: 'md' },
+});
 
 export const inputLabel = style([fonts.body04, { marginBottom: '0.3rem', color: colors.black01 }]);
 
 export const input = style([
   layout.flexAlignCenter,
   fonts.caption02,
+  formBlock,
   {
-    width: formWidth,
     height: '4rem',
     padding: '0 1.6rem',
     border: `1px solid ${colors.grey10}`,
@@ -96,6 +110,7 @@ export const input = style([
   },
 ]);
 
+// 하단 버튼
 export const buttonContainer = style([
   {
     position: 'fixed',
@@ -105,9 +120,10 @@ export const buttonContainer = style([
   },
 ]);
 
+// 부모 정보 입력 스텝
 export const doseBox = style([
+  formBlock,
   {
-    width: formWidth,
     minHeight: '4rem',
     display: 'flex',
     alignItems: 'stretch',
@@ -126,13 +142,13 @@ export const doseLeft = style([
   },
 ]);
 
-export const doseDivider = style([
-  {
-    width: '0.1rem',
-    alignSelf: 'stretch',
-    backgroundColor: colors.grey10,
-  },
-]);
+const fullHeightDivider = style({
+  width: '0.1rem',
+  alignSelf: 'stretch',
+  backgroundColor: colors.grey10,
+});
+
+export const doseDivider = style([fullHeightDivider]);
 
 export const doseRight = style([
   layout.flexColumn,
@@ -167,8 +183,8 @@ export const selectPlain = style([
 
 export const timeList = style([
   layout.flexColumn,
+  formBlock,
   {
-    width: formWidth,
     gap: '0.8rem',
     marginTop: '0.6rem',
   },
@@ -181,10 +197,11 @@ export const timeRow = style([
   },
 ]);
 
+// 부모 정보 요약
 export const addMoreBox = style([
   layout.flexCenter,
+  formBlock,
   {
-    width: formWidth,
     height: '4rem',
     gap: '0.6rem',
     borderRadius: '5px',
@@ -201,12 +218,13 @@ export const addMoreText = style([fonts.caption02, { color: colors.grey09 }]);
 
 export const parentSummaryList = style([
   layout.flexColumn,
-  { width: formWidth, gap: '0.8rem', margin: '1.2rem 0' },
+  formBlock,
+  { gap: '0.8rem', margin: '1.2rem 0' },
 ]);
 
 export const parentSummaryCard = style([
+  formBlock,
   {
-    width: formWidth,
     border: `1px solid ${colors.grey10}`,
     borderRadius: '8px',
     backgroundColor: colors.white01,
@@ -223,27 +241,20 @@ export const parentSummaryHeader = style([
 
 export const parentSummaryTitle = style([fonts.body04, { color: colors.black01 }]);
 
-export const parentSummaryActions = style([
-  {
-    display: 'flex',
-    gap: '0.8rem',
-  },
-]);
+export const parentSummaryActions = style([layout.flexAlignCenter, { gap: '0.8rem' }]);
 
-export const parentSummaryAction = style([
-  fonts.caption02,
-  {
-    color: colors.grey08,
-    background: 'transparent',
-    border: 'none',
-    cursor: 'pointer',
-    padding: 0,
-  },
-]);
+const buttonReset = style({
+  background: 'transparent',
+  border: 'none',
+  padding: 0,
+  cursor: 'pointer',
+});
+
+export const parentSummaryAction = style([fonts.caption02, buttonReset, { color: colors.grey08 }]);
 
 export const parentSummaryRow = style([fonts.caption02, { color: colors.black01 }]);
 
-export const addMoreWrapper = style([{ width: formWidth, marginTop: '1rem' }]);
+export const addMoreWrapper = style([formBlock, { marginTop: '1rem' }]);
 
 export const requiredMark = style([
   {

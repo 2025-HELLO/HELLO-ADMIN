@@ -39,7 +39,7 @@ const ParentInfoStep = ({ onNext }: Props) => {
           value={current.drugName}
           onChange={(v) => setCurrent((p) => ({ ...p, drugName: v }))}
         />
-        <div className={s.inputGroup}>
+        <div className={s.inputGroup({ size: 'md' })}>
           <label className={s.inputLabel}>시간</label>
           <DoseSelector
             freq={current.freq}
