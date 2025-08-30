@@ -26,7 +26,7 @@ const AccountStep = ({ onNext }: Props) => {
   return (
     <section className={s.container}>
       <h1 className={s.title}>계정 생성</h1>
-      <form onSubmit={handleSubmit}>
+      <form className={s.form} onSubmit={handleSubmit}>
         <div className={s.inputGroup({ size: 'lg' })}>
           <label htmlFor="id" className={s.inputLabel}>
             아이디

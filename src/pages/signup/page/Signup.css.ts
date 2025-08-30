@@ -29,7 +29,7 @@ export const progressBarContainer = style([
 export const title = style([
   fonts.title01,
   textBlock,
-  { color: colors.black01, marginBottom: '2.2rem' },
+  { color: colors.black01, marginBottom: '2.2rem', whiteSpace: 'nowrap' },
 ]);
 
 export const semiTitle = style([fonts.body03, textBlock]);
@@ -37,7 +37,13 @@ export const semiTitle = style([fonts.body03, textBlock]);
 export const subTitle = style([
   fonts.subtitle01,
   textBlock,
-  { color: colors.black01, margin: '1.5rem 0' },
+  { color: colors.black01, margin: '1rem 0 2rem' },
+]);
+
+export const subTitleCenter = style([
+  fonts.subtitle03,
+  textBlock,
+  { color: colors.black01, textAlign: 'center', marginBottom: '2rem' },
 ]);
 
 export const description = style([
@@ -321,4 +327,89 @@ export const timeButtonActive = style([
     border: `1px solid ${colors.blue02}`,
     color: colors.white01,
   },
+]);
+
+// 인증 코드
+export const verifyCodeContainer = style([
+  layout.flexColumn,
+  {
+    backgroundColor: colors.grey11,
+    borderRadius: '10px',
+    gap: '3rem',
+    marginBottom: '2.4rem',
+    padding: '2rem',
+    width: '33rem',
+  },
+]);
+
+export const verifyCodeTitle = style([fonts.caption01, { color: colors.black01 }]);
+
+export const verifyCodeTopRow = style([layout.flexBetweenCenter, { width: '100%' }]);
+
+export const copyAction = style([
+  layout.flexAlignCenter,
+  {
+    background: 'transparent',
+    border: 'none',
+    cursor: 'pointer',
+    gap: '0.3rem',
+  },
+]);
+
+export const copyIcon = style({
+  width: '1.2rem',
+  height: '1.2rem',
+  color: colors.grey07,
+});
+
+export const copyText = style([fonts.caption02, { color: colors.grey07 }]);
+
+export const verifyCodeInputContainer = style([
+  layout.flexAlignCenter,
+  {
+    gap: '1.4rem',
+  },
+]);
+
+export const verifyCodeInput = style([
+  layout.flexAlignCenter,
+  fonts.caption01,
+  {
+    backgroundColor: colors.white01,
+    border: `1px solid ${colors.grey10}`,
+    borderRadius: '5px',
+    height: '4rem',
+    textAlign: 'center',
+    width: '2.5rem',
+  },
+]);
+
+export const verifyCodeHint = style([
+  fonts.caption02,
+  { color: colors.grey08, textAlign: 'center' },
+]);
+
+export const descriptionContainer = style([
+  layout.flexColumn,
+  {
+    border: `1px solid ${colors.grey09}`,
+    borderRadius: '10px',
+    gap: '0.8rem',
+    padding: '2rem 2.8rem',
+    width: '33rem',
+  },
+]);
+
+export const descriptionHeader = style([layout.flexAlignCenter, { gap: '0.5rem' }]);
+
+export const descriptionIcon = style({
+  width: '2.1rem',
+  height: '2.1rem',
+});
+
+export const descriptionText = style([fonts.body01, { color: colors.black01 }]);
+
+export const descriptionBody = style([
+  fonts.caption02,
+  { display: 'block', color: colors.grey07, whiteSpace: 'nowrap' },
 ]);
