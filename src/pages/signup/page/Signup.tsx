@@ -1,11 +1,12 @@
 import { useFunnel } from '@use-funnel/react-router-dom';
 
+import StepLayout from '../components/StepLayout';
 import type { SignupSteps, StepComponent } from '../types';
-import TermsStep from '../components/TermsStep';
-import ParentInfoStep from '../components/ParentInfoStep';
-import NotifyStep from '../components/NotifyStep';
-import AccountStep from '../components/AccountStep';
-import DoneStep from '../components/DoneStep';
+import TermsStep from '../components/step/TermsStep';
+import ParentInfoStep from '../components/step/ParentInfoStep';
+import NotifyStep from '../components/step/NotifyStep';
+import AccountStep from '../components/step/AccountStep';
+import DoneStep from '../components/step/DoneStep';
 
 const STEPS = {
   Terms: 'Terms',
@@ -16,18 +17,30 @@ const STEPS = {
 } as const;
 
 const TermsRenderer: StepComponent = ({ history }) => (
-  <TermsStep onNext={() => history.push(STEPS.ParentInfo, {})} />
+  <StepLayout current={1}>
+    <TermsStep onNext={() => history.push(STEPS.ParentInfo, {})} />
+  </StepLayout>
 );
 const ParentInfoRenderer: StepComponent = ({ history }) => (
-  <ParentInfoStep onNext={() => history.push(STEPS.Notify, {})} />
+  <StepLayout current={2}>
+    <ParentInfoStep onNext={() => history.push(STEPS.Notify, {})} />
+  </StepLayout>
 );
 const NotifyRenderer: StepComponent = ({ history }) => (
-  <NotifyStep onNext={() => history.push(STEPS.Account, {})} />
+  <StepLayout current={3}>
+    <NotifyStep onNext={() => history.push(STEPS.Account, {})} />
+  </StepLayout>
 );
 const AccountRenderer: StepComponent = ({ history }) => (
-  <AccountStep onNext={() => history.push(STEPS.Done, {})} />
+  <StepLayout current={4}>
+    <AccountStep onNext={() => history.push(STEPS.Done, {})} />
+  </StepLayout>
 );
-const DoneRenderer: StepComponent = () => <DoneStep />;
+const DoneRenderer: StepComponent = () => (
+  <StepLayout current={5}>
+    <DoneStep />
+  </StepLayout>
+);
 
 const Signup = () => {
   const funnel = useFunnel<SignupSteps>({
