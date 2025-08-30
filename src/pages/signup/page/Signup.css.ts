@@ -9,8 +9,10 @@ const textBlock = style({ width: '30rem' });
 
 // 공통 컨테이너
 export const container = style([
-  layout.flexColumnCenter,
+  layout.flexColumn,
   {
+    alignItems: 'center',
+    minHeight: '100vh',
     padding: '2.5rem 4.4rem',
   },
 ]);
@@ -30,6 +32,8 @@ export const title = style([
   { color: colors.black01, marginBottom: '2.2rem' },
 ]);
 
+export const semiTitle = style([fonts.body03, textBlock]);
+
 export const subTitle = style([
   fonts.subtitle01,
   textBlock,
@@ -41,6 +45,8 @@ export const description = style([
   textBlock,
   { color: colors.black01, marginBottom: '3.2rem' },
 ]);
+
+export const form = style([layout.flexColumn, { flex: 1 }]);
 
 // 약관 동의 스텝
 export const allTerms = style([
@@ -113,12 +119,14 @@ export const input = style([
 // 하단 버튼
 export const buttonContainer = style([
   {
-    position: 'fixed',
-    bottom: '5.5rem',
-    left: '50%',
-    transform: 'translateX(-50%)',
+    marginTop: 'auto',
+    paddingTop: '2rem',
   },
 ]);
+
+export const bottomSpacer = style({
+  height: '7rem',
+});
 
 // 부모 정보 입력 스텝
 export const doseBox = style([
@@ -259,5 +267,58 @@ export const addMoreWrapper = style([formBlock, { marginTop: '1rem' }]);
 export const requiredMark = style([
   {
     color: colors.error01,
+  },
+]);
+
+// timeblock
+export const timeSection = style({
+  marginTop: '3rem',
+  width: '30rem',
+});
+
+export const timeLabel = style([
+  fonts.body04,
+  {
+    color: colors.black01,
+    marginBottom: '1rem',
+  },
+]);
+
+export const timeBlock = style({
+  marginBottom: '2rem',
+});
+
+export const timeTitle = style([
+  fonts.caption01,
+  {
+    color: colors.black01,
+    marginBottom: '0.5rem',
+  },
+]);
+
+export const timeGrid = style({
+  display: 'grid',
+  gap: '0.5rem',
+  gridTemplateColumns: 'repeat(4, 1fr)',
+});
+
+export const timeButton = style([
+  fonts.caption02,
+  {
+    backgroundColor: colors.white01,
+    border: `1px solid ${colors.grey10}`,
+    borderRadius: '0.5rem',
+    color: colors.black01,
+    padding: '1.5rem 0',
+    textAlign: 'center',
+  },
+]);
+
+export const timeButtonActive = style([
+  fonts.caption01,
+  {
+    backgroundColor: colors.blue02,
+    border: `1px solid ${colors.blue02}`,
+    color: colors.white01,
   },
 ]);
