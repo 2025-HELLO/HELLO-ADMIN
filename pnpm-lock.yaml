@@ -11,6 +11,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.83.0
         version: 5.85.5(react@19.1.1)
+      '@use-funnel/react-router-dom':
+        specifier: ^0.0.14
+        version: 0.0.14(react-router-dom@7.8.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)
       '@vanilla-extract/css':
         specifier: ^1.17.4
         version: 1.17.4
@@ -843,6 +846,17 @@ packages:
   '@typescript-eslint/visitor-keys@8.40.0':
     resolution: {integrity: sha512-8CZ47QwalyRjsypfwnbI3hKy5gJDPmrkLjkgMxhi0+DZZ2QNx2naS6/hWoVYUHU7LU2zleF68V9miaVZvhFfTA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@use-funnel/core@0.0.12':
+    resolution: {integrity: sha512-IikmJCqiQxbqxMAKdIEvX4MiuaM4nu0mfuAdnbI4CKf1FFLy/c4GHGKHW2+zm4aQAdEtxCuwou/wOwDhrTSWbg==}
+    peerDependencies:
+      react: '>=16.8'
+
+  '@use-funnel/react-router-dom@0.0.14':
+    resolution: {integrity: sha512-bQtSvV8lqwDdytabVEkaL5H/LyckQwvnCyUQdY4lSeN1RXdXtQEyhUV0Z2bnigMkt0Qd6iOxIVn1zwoYMK6oEw==}
+    peerDependencies:
+      react: '>=16.8'
+      react-router-dom: '>=6'
 
   '@vanilla-extract/babel-plugin-debug-ids@1.2.2':
     resolution: {integrity: sha512-MeDWGICAF9zA/OZLOKwhoRlsUW+fiMwnfuOAqFVohL31Agj7Q/RBWAYweqjHLgFBCsdnr6XIfwjJnmb2znEWxw==}
@@ -2984,6 +2998,16 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.40.0
       eslint-visitor-keys: 4.2.1
+
+  '@use-funnel/core@0.0.12(react@19.1.1)':
+    dependencies:
+      react: 19.1.1
+
+  '@use-funnel/react-router-dom@0.0.14(react-router-dom@7.8.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@use-funnel/core': 0.0.12(react@19.1.1)
+      react: 19.1.1
+      react-router-dom: 7.8.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
 
   '@vanilla-extract/babel-plugin-debug-ids@1.2.2':
     dependencies:
