@@ -87,7 +87,7 @@ const NotifyStep = ({ onNext }: Props) => {
           />
         ))}
       </div>
-      <div className={s.buttonContainer}>
+      <div className={s.notiButtonContainer}>
         <Button variant="primary" label="다음" onClick={onNext} />
       </div>
     </section>

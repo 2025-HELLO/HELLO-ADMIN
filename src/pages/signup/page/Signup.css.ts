@@ -124,9 +124,20 @@ export const input = style([
 
 // 하단 버튼
 export const buttonContainer = style([
+  layout.flexCenter,
   {
-    marginTop: 'auto',
-    paddingTop: '2rem',
+    position: 'fixed',
+    bottom: 0,
+    left: '50%',
+    transform: 'translateX(-50%)',
+    padding: '1rem 1.6rem calc(3rem + env(safe-area-inset-bottom))',
+  },
+]);
+
+export const notiButtonContainer = style([
+  layout.flexCenter,
+  {
+    padding: '1rem 1.6rem calc(3rem + env(safe-area-inset-bottom))',
   },
 ]);
 
