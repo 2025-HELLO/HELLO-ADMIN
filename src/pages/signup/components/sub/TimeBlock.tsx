@@ -1,29 +1,33 @@
 import * as s from '../../page/Signup.css';
 
+import type { TimeOption } from '@/shared/constants/times';
+
 type TimeBlockProps = {
   title: string;
-  times: string[];
-  selected: string;
-  onSelect: (time: string) => void;
+  times: TimeOption[];
+  selected: string | null;
+  onSelect: (value: string | null) => void;
 };
 
-function TimeBlock({ title, times, selected, onSelect }: TimeBlockProps) {
+const TimeBlock = ({ title, times, selected, onSelect }: TimeBlockProps) => {
   return (
     <div className={s.timeBlock}>
       <div className={s.timeTitle}>{title}</div>
       <div className={s.timeGrid}>
-        {times.map((timeValue) => (
+        {times.map(({ value, label }) => (
           <button
-            key={timeValue}
-            className={`${s.timeButton} ${selected === timeValue ? s.timeButtonActive : ''}`}
-            onClick={() => onSelect(timeValue)}
+            type="button"
+            key={value ?? 'none'}
+            className={`${s.timeButton} ${selected === value ? s.timeButtonActive : ''}`}
+            onClick={() => onSelect(value)}
+            aria-pressed={selected === value}
           >
-            {timeValue}
+            {label}
           </button>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default TimeBlock;

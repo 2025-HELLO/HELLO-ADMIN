@@ -59,12 +59,7 @@ const TermsStep = ({ onNext }: Props) => {
       <p className={s.description}>서비스 이용을 위해 아래 약관에 동의해주세요.</p>
 
       <label className={s.allTerms}>
-        <input
-          type="checkbox"
-          checked={allChecked}
-          onChange={toggleAll}
-          aria-label="모든 약관에 동의합니다"
-        />
+        <input type="checkbox" checked={allChecked} onChange={toggleAll} />
         <div className={s.allTermsText}>모든 약관에 동의합니다.</div>
       </label>
 
@@ -75,7 +70,6 @@ const TermsStep = ({ onNext }: Props) => {
               type="checkbox"
               checked={checkedMap[term.id]}
               onChange={() => toggleItem(term.id)}
-              aria-label={term.label}
             />
             <div className={s.termsText}>{term.label}</div>
           </label>

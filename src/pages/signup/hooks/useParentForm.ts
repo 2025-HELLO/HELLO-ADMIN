@@ -28,8 +28,8 @@ const useParentForm = () => {
       parentAge: parentAge.trim(),
       drugName: drugName.trim(),
     };
-    if (!trimmed.parentName || !trimmed.parentAge) {
-      alert('성함과 나이를 입력해주세요.');
+    if (!trimmed.parentName || !trimmed.parentAge || !trimmed.drugName) {
+      alert('성함, 나이, 복용 약 이름을 모두 입력해주세요.');
       return;
     }
     const entry: ParentEntry = {

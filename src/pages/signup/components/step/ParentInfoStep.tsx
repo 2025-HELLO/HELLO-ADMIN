@@ -24,11 +24,16 @@ const ParentInfoStep = ({ onNext }: Props) => {
 
   const handleNext = () => goNext(onNext);
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleNext();
+  };
+
   return (
     <section className={s.container}>
       <h1 className={s.title}>부모 정보 입력</h1>
       <ParentSummaryList parents={parents} onEdit={editParent} onRemove={removeParent} />
-      <form>
+      <form onSubmit={handleSubmit}>
         <ParentBasicFields
           parentName={current.parentName}
           parentAge={current.parentAge}

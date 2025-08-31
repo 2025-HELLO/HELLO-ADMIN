@@ -1,55 +1,34 @@
-import { useFunnel } from '@use-funnel/react-router-dom';
+type TimeValue = string;
 
-import StepLayout from '../components/StepLayout';
-import type { SignupSteps, StepComponent } from '../types';
-import TermsStep from '../components/step/TermsStep';
-import ParentInfoStep from '../components/step/ParentInfoStep';
-import NotifyStep from '../components/step/NotifyStep';
-import AccountStep from '../components/step/AccountStep';
-import DoneStep from '../components/step/DoneStep';
+interface TimeOption {
+  label: string;
+  value: TimeValue;
+}
 
-const STEP_ORDER = ['Terms', 'ParentInfo', 'Notify', 'Account', 'Done'] as const;
-type StepKey = (typeof STEP_ORDER)[number];
+interface TimeBlockProps {
+  title: string;
+  times: TimeOption[];
+  selected: TimeValue;
+  onSelect: (value: TimeValue) => void;
+}
 
-const indexOf = (k: StepKey) => STEP_ORDER.indexOf(k) + 1;
-
-const makeRenderer =
-  (
-    key: Exclude<StepKey, 'Done'>,
-    Comp: React.FC<{ onNext: () => void }>,
-    next: StepKey,
-  ): StepComponent =>
-  ({ history }) => (
-    <StepLayout current={indexOf(key)}>
-      <Comp onNext={() => history.push(next, {})} />
-    </StepLayout>
-  );
-
-const TermsRenderer: StepComponent = makeRenderer('Terms', TermsStep, 'ParentInfo');
-const ParentInfoRenderer: StepComponent = makeRenderer('ParentInfo', ParentInfoStep, 'Notify');
-const NotifyRenderer: StepComponent = makeRenderer('Notify', NotifyStep, 'Account');
-const AccountRenderer: StepComponent = makeRenderer('Account', AccountStep, 'Done');
-const DoneRenderer: StepComponent = () => (
-  <StepLayout current={indexOf('Done')}>
-    <DoneStep />
-  </StepLayout>
-);
-
-const Signup = () => {
-  const funnel = useFunnel<SignupSteps>({
-    id: 'signup-funnel',
-    initial: { step: STEP_ORDER[0], context: {} },
-  });
-
+const TimeBlock = ({ title, times, selected, onSelect }: TimeBlockProps) => {
   return (
-    <funnel.Render
-      Terms={TermsRenderer}
-      ParentInfo={ParentInfoRenderer}
-      Notify={NotifyRenderer}
-      Account={AccountRenderer}
-      Done={DoneRenderer}
-    />
+    <div>
+      <h3>{title}</h3>
+      <ul>
+        {times.map((time) => (
+          <li
+            key={time.value}
+            style={{ fontWeight: time.value === selected ? 'bold' : 'normal' }}
+            onClick={() => onSelect(time.value)}
+          >
+            {time.label}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
-export default Signup;
+export default TimeBlock;

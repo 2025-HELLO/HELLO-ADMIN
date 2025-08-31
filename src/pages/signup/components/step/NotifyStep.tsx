@@ -10,6 +10,7 @@ import {
   LUNCH_TIMES,
   DINNER_TIMES,
   REPORT_TIMES,
+  type TimeOption,
 } from '@/shared/constants/times';
 import Button from '@/common/components/button/Button';
 
@@ -19,18 +20,28 @@ interface Props {
 
 interface TimeRow {
   title: string;
-  times: string[];
-  selected: string;
-  onSelect: React.Dispatch<React.SetStateAction<string>>;
+  times: TimeOption[];
+  selected: string | null;
+  onSelect: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const NotifyStep = ({ onNext }: Props) => {
-  const [selectedWakeup, setSelectedWakeup] = useState(WAKEUP_TIMES[0]);
-  const [selectedBreakfast, setSelectedBreakfast] = useState(BREAKFAST_TIMES[0]);
-  const [selectedLunch, setSelectedLunch] = useState(LUNCH_TIMES[0]);
-  const [selectedDinner, setSelectedDinner] = useState(DINNER_TIMES[0]);
-  const [selectedBedtime, setSelectedBedtime] = useState(BEDTIME_TIMES[0]);
-  const [selectedReport, setSelectedReport] = useState(REPORT_TIMES[0]);
+  const [selectedWakeup, setSelectedWakeup] = useState<string | null>(
+    WAKEUP_TIMES[0]?.value ?? null,
+  );
+  const [selectedBreakfast, setSelectedBreakfast] = useState<string | null>(
+    BREAKFAST_TIMES[0]?.value ?? null,
+  );
+  const [selectedLunch, setSelectedLunch] = useState<string | null>(LUNCH_TIMES[0]?.value ?? null);
+  const [selectedDinner, setSelectedDinner] = useState<string | null>(
+    DINNER_TIMES[0]?.value ?? null,
+  );
+  const [selectedBedtime, setSelectedBedtime] = useState<string | null>(
+    BEDTIME_TIMES[0]?.value ?? null,
+  );
+  const [selectedReport, setSelectedReport] = useState<string | null>(
+    REPORT_TIMES[0]?.value ?? null,
+  );
 
   const times: TimeRow[] = [
     {

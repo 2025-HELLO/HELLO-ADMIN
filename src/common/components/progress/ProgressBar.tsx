@@ -7,7 +7,7 @@ interface Props {
 }
 
 const ProgressBar = ({ total, current, minimal = false }: Props) => {
-  const percentage = Math.min(100, Math.max(0, (current / total) * 100));
+  const percentage = total > 0 ? Math.min(100, Math.max(0, (current / total) * 100)) : 0;
 
   if (minimal) {
     return (
