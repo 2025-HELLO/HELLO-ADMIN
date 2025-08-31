@@ -22,7 +22,7 @@ export const bar = style({
   top: 0,
   left: 0,
   height: '100%',
-  background: colors.blue02,
+  background: colors.blue03,
   borderRadius: '6px',
   transition: 'width 200ms ease',
 });

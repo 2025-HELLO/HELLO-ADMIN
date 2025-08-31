@@ -3,10 +3,19 @@ import * as s from './ProgressBar.css';
 interface Props {
   total: number;
   current: number;
+  minimal?: boolean;
 }
 
-const ProgressBar = ({ total, current }: Props) => {
-  const percentage = Math.min(100, Math.max(0, (current / total) * 100));
+const ProgressBar = ({ total, current, minimal = false }: Props) => {
+  const percentage = total > 0 ? Math.min(100, Math.max(0, (current / total) * 100)) : 0;
+
+  if (minimal) {
+    return (
+      <div className={s.track} aria-hidden>
+        <div className={s.bar} style={{ width: `${percentage}%` }} />
+      </div>
+    );
+  }
 
   return (
     <div className={s.container} role="progressbar" aria-label="진행률">

@@ -1,6 +1,8 @@
 export { default as IcBack } from './IcBack';
+export { default as IcCopy } from './IcCopy';
 export { default as IcInfo } from './IcInfo';
 export { default as IcLeftarrow } from './IcLeftarrow';
+export { default as IcNotification } from './IcNotification';
 export { default as IcPlay } from './IcPlay';
 export { default as IcProfile } from './IcProfile';
 export { default as IcRecord } from './IcRecord';

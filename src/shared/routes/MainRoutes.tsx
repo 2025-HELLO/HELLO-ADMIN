@@ -9,6 +9,7 @@ import VoiceCollector from '@/pages/data/voice/page/VoiceCollector';
 import WeeklyReportList from '@/pages/weekly-report/page/WeeklyReportList';
 import WeeklyReportDetail from '@/pages/weekly-report/page/WeeklyReportDetail';
 import ChatCollector from '@/pages/data/chat/page/ChatCollector';
+import Signup from '@/pages/signup/page/Signup';
 
 export const MainRoutes: RouteObject[] = [
   {
@@ -23,7 +24,7 @@ export const MainRoutes: RouteObject[] = [
         element: <VoiceCollector />,
       },
       {
-        path: PATH.CHAT_DATA, // ⬅️ PATH에 CHAT_DATA 추가해놔야 함
+        path: PATH.CHAT_DATA,
         element: <ChatCollector />,
       },
     ],
@@ -38,6 +39,15 @@ export const MainRoutes: RouteObject[] = [
       {
         path: PATH.WEEKLY_REPORT_DETAIL(':id'),
         element: <WeeklyReportDetail />,
+      },
+    ],
+  },
+  {
+    element: <Layout header={<PageHeader title="회원가입" />} />,
+    children: [
+      {
+        path: PATH.SIGNUP,
+        element: <Signup />,
       },
     ],
   },
