@@ -102,14 +102,7 @@ const MyPage = () => {
         />
       ))}
       <div className={s.btnContainer}>
-        <Button
-          variant="primary"
-          label="저장"
-          onClick={() => {
-            console.log('Mock save data', { user: userData, meds });
-            alert('저장되었습니다 (mock)');
-          }}
-        />
+        <Button variant="primary" label="저장" />
       </div>
 
       <div className={s.chatCtaCard}>
