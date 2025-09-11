@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 
-import * as s from '../../page/Signup.css';
-import { FREQUENCIES, TIMES, DEFAULT_TIME } from '../../constants/medication';
+import * as s from './DoseSelector.css';
+import { FREQUENCIES, TIMES, DEFAULT_TIME } from '../../../pages/signup/constants/medication';
 
 export type Freq = (typeof FREQUENCIES)[number];
 

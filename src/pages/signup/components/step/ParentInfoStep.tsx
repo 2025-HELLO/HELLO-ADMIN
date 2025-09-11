@@ -1,7 +1,9 @@
 import * as s from '../../page/Signup.css';
-import { DoseSelector, ParentSummaryList, ParentBasicFields, DrugFields, AddMoreBox } from '../sub';
+import { ParentSummaryList, ParentBasicFields, DrugFields } from '../sub';
 import useParentForm from '../../hooks/useParentForm';
 
+import AddMoreBox from '@/common/components/addMore/AddMoreBox';
+import DoseSelector from '@/common/components/doseSelector/DoseSelector';
 import Button from '@/common/components/button/Button';
 
 interface Props {
@@ -53,7 +55,7 @@ const ParentInfoStep = ({ onNext }: Props) => {
             setTimes={updateTimes}
           />
         </div>
-        <AddMoreBox onClick={addCurrentAsParent} />
+        <AddMoreBox text="추가 부모 정보 입력하기" onClick={addCurrentAsParent} />
       </form>
       <div className={s.buttonContainer}>
         <Button variant="primary" label="다음" onClick={handleNext} disabled={!canProceed} />
