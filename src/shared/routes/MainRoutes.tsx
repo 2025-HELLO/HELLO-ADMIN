@@ -10,6 +10,7 @@ import WeeklyReportList from '@/pages/weekly-report/page/WeeklyReportList';
 import WeeklyReportDetail from '@/pages/weekly-report/page/WeeklyReportDetail';
 import ChatCollector from '@/pages/data/chat/page/ChatCollector';
 import Signup from '@/pages/signup/page/Signup';
+import MyPage from '@/pages/mypage/page/MyPage';
 
 export const MainRoutes: RouteObject[] = [
   {
@@ -48,6 +49,15 @@ export const MainRoutes: RouteObject[] = [
       {
         path: PATH.SIGNUP,
         element: <Signup />,
+      },
+    ],
+  },
+  {
+    element: <Layout header={<PageHeader title="마이페이지" />} />,
+    children: [
+      {
+        path: PATH.MYPAGE,
+        element: <MyPage />,
       },
     ],
   },

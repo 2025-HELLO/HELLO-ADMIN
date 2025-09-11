@@ -1,5 +1,5 @@
 import * as s from '../../page/Signup.css';
-import type { Freq, Time } from './DoseSelector';
+import type { Freq, Time } from '../../../../common/components/doseSelector/DoseSelector';
 
 export interface ParentEntry {
   parentName: string;
