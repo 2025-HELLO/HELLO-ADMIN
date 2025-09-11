@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { MOCK_MEDS, MOCK_USER } from '../mocks/mypageData';
 import { MedDoseEditor, MedList } from '../components';
@@ -7,6 +8,7 @@ import * as s from './MyPage.css';
 import AddMoreBox from '@/common/components/addMore/AddMoreBox';
 import Button from '@/common/components/button/Button';
 import { type Freq, type Time } from '@/common/components/doseSelector/DoseSelector';
+import { PATH } from '@/shared/constants/path';
 import { DEFAULT_TIME } from '@/pages/signup/constants/medication';
 
 interface User {
@@ -23,6 +25,7 @@ interface Med {
 const userData: User = MOCK_USER;
 
 const MyPage = () => {
+  const navigate = useNavigate();
   const [meds, setMeds] = useState<Med[]>(() =>
     MOCK_MEDS.map((m) => ({ name: m.name, freq: m.freq as Freq, times: m.times as Time[] })),
   );
@@ -107,6 +110,13 @@ const MyPage = () => {
             alert('저장되었습니다 (mock)');
           }}
         />
+      </div>
+
+      <div className={s.chatCtaCard}>
+        <div className={s.chatCtaTitle}>챗봇 데이터 수집</div>
+        <button type="button" className={s.chatCtaBtn} onClick={() => navigate(PATH.ROOT)}>
+          추가하러 가기
+        </button>
       </div>
 
       <div className={s.logoutRow}>

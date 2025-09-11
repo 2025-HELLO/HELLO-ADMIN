@@ -126,3 +126,31 @@ export const divider = style({
   color: colors.black01,
   lineHeight: '1.8',
 });
+
+export const chatCtaCard = style([
+  formBlock,
+  {
+    marginTop: '2rem',
+    borderRadius: '5px',
+    background: `linear-gradient(135deg, ${colors.blue04} 0%, ${colors.blue06} 70%)`,
+    color: colors.white01,
+    padding: '1.8rem',
+  },
+]);
+
+export const chatCtaTitle = style([fonts.title03, { color: colors.white01 }]);
+
+export const chatCtaBtn = style([
+  fonts.caption01,
+  {
+    display: 'inline-block',
+    marginTop: '1.4rem',
+    backgroundColor: colors.white01,
+    color: colors.black01,
+    padding: '0.8rem 1.4rem',
+    borderRadius: '100px',
+    border: 'none',
+    cursor: 'pointer',
+    boxShadow: '0 6px 12px rgba(0,0,0,0.12)',
+  },
+]);
